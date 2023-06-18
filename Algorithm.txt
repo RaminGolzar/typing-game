@@ -1,0 +1,30 @@
+# Algorithm
+
+## Game Conditions
+
++ There should 5 levels
+
++ Each level has 1 minute
+
++ Speling mistakes do not cause loss
+
++ In each level, one line is provided for typing, 
+	the number of words of which should be 
+	equal to the level number
+
++ Allow 7 second to type each line
+
++ If 3 lines are not typed, the player loses
+
+## The result of the game
+
++ Typing speed word per minute
+
++ Character typing speed per minute
+
++ The number of speling mistakes in all levels
+
++ Number of words typed
+
++ Number of character typed
+
