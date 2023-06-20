@@ -43,5 +43,5 @@ h1 span:first-child {
 #progress-bar {
 	height: 40px;
 	width: 20%;
-	background: linear-gradient(to bottom , #24d 20% , #0af 35% , #ccf 60% , #47f 80%);
+	background: linear-gradient(to bottom , #24d 10% , #aaf 25%  , #0af 35% , #ccf 60% , #47f 80%);
 }
