@@ -9,39 +9,65 @@
         <link rel="stylesheet" href="style.css" type="text/css">
 
     </head>
-    <body class="w3-display-container w3-padding-large">
+    <body class="w3-display-container w3-padding-large w3-brown">
         <header class="w3-display-topmiddle w3-padding-large">
             <h1 class="w3-center w3-large">
-                <span class="w3-text-yellow w3-brown w3-padding-small"><b>TG</b></span>
+                <span class="w3-text-black w3-red w3-padding-small"><b>TG</b></span>
                 <span class="w3-center"><b>Typing Game</b></span>
             </h1>
         </header>
         
+        <!-- Game box -->
         <section class="w3-display-middle w3-block w3-padding-large">
-            <section id="game-box" class="w3-twothird w3-border-brown w3-leftbar w3-bottombar w3-rightbar">
-                
+            <section id="game-box" class="w3-center w3-twothird w3-border-yellow w3-leftbar w3-bottombar w3-rightbar">
+                <span class="w3-padding w3-black w3-round-large">
+                    content red bluebrry banana angry-bird
+                </span>
             </section>
             
+            <!-- Status box -->
             <section id="status-box" class="w3-display-container w3-third">
                 <section class="w3-display-middle w3-center w3-block">
-                    <span class="w3-text-white w3-xxxlarge"><b>&times</b></span>
-                    <span class="w3-text-white w3-xxxlarge"><b>&times</b></span>
-                    <span class="w3-text-white w3-xxxlarge"><b>&times</b></span>
+                    <!-- Level -->
+                    <section class="w3-large w3-text-white">
+                        <b>Level <span id="level"></span></b>
+                    </section>
                     
+                    <!-- Times -->
+                    <span id="times-1" class="w3-text-white w3-xxxlarge"><b>&times</b></span>
+                    <span id="times-2" class="w3-text-white w3-xxxlarge"><b>&times</b></span>
+                    <span id="times-3" class="w3-text-white w3-xxxlarge"><b>&times</b></span>
+                    
+                    <!-- Progress -->
                     <section class="w3-block w3-padding-large">
                         <div id="progress" class="w3-display-container w3-block w3-round-xxlarge w3-xlarge">
                             <div id="progress-bar"></div>
                             <span id="progress-number" class="w3-display-middle">
-                                60
+                                0
                             </span>
                         </div>
+                    </section>
+                    
+                    <!-- Statistics -->
+                    <section class="w3-block">
+                        <section class="w3-third w3-center">
+                            <b>Word</b> <br/><span id="word-count">0</span>
+                        </section>
+                        
+                        <section class="w3-third w3-center">
+                            <b>Char</b> <br/><span id="char-count">0</span>
+                        </section>
+                        
+                        <section class="w3-third w3-center">
+                            <b>Mistakes</b> <br/><span id="mis-count">0</span>
+                        </section>
                     </section>
                 </section>
             </section>
         </section>
         
-        <footer class="w3-display-bottommiddle w3-block w3-padding-large w3-black w3-border">
-            here is the menu location
+        <footer class="w3-display-bottommiddle w3-block w3-padding-large w3-center">
+            <button class="w3-text-white w3-hover-text-yellow w3-button w3-round-large ss-button">Start</button>
         </footer>
         
     </body>

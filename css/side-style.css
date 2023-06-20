@@ -7,7 +7,7 @@ body {
 	position: absolute !important;
 	width: 100%;
 	min-height: 100%;
-	background-color: #a84;
+	/* background-color: #a84; */
 }
 
 h1 span:last-child {
@@ -22,12 +22,12 @@ h1 span:first-child {
 }
 
 #game-box {
-	height: 200px;
+	height: 250px;
 	border-top: 2px dashed #f00;
 }
 
 #status-box {
-	height: 200px;
+	height: 250px;
 }
 
 #progress {
@@ -42,6 +42,11 @@ h1 span:first-child {
 
 #progress-bar {
 	height: 40px;
-	width: 20%;
+	width: 0;
 	background: linear-gradient(to bottom , #24d 10% , #aaf 25%  , #0af 35% , #ccf 60% , #47f 80%);
+}
+
+.ss-button {
+	border: 2px solid #3c3;
+	background: linear-gradient(to bottom , #6a6 45% , #373 55%);
 }
