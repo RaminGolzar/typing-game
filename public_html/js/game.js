@@ -7,16 +7,45 @@ const lorem = {
         this.loremIpsum = this.loremIpsum.split(' ');
     } ,
     
-    getIndex : function (count){
-        let maxPos = this.loremIpsum.length - count;
-    
-        let randPos = Math.round(Math.random() * maxPos);
+    getIndex : function (count , minLen = 0 , maxLen = 0){
+        let result = [];
         
-        return this.loremIpsum.splice(randPos , count);
+        for (var i = 0; i < count; i++) {
+//            result [i] = extractCondition (minLen , maxLen);
+            result [i] = 'AAA';
+        }
+        
+        return result;
+    } ,
+    
+    extractCondition : function (minLen , maxLen) {
+        let counter = 0;
+        
+        if (minLen == 0 && maxLen == 0) {
+            return this.loremIpsum[this.randPos()];
+        } else if (minLen != 0 && maxLen == 0) {
+            let word = 'lorem';
+            
+            do {
+                word = this.loremIpsum [this.randPos()];
+                
+                /* infinity control */
+                if (++counter > 1000) {
+                    break;
+                }
+            } while (word.length <= minLen);
+            
+            return word;
+        }
+    } ,
+    
+    randPos : function () {
+        return Math.round (Math.random() * this.loremIpsum.length);
     } ,
     
     cleanMarks : function () {
         this.loremIpsum = this.loremIpsum.replaceAll ('.' , '');
+        
         this.loremIpsum = this.loremIpsum.replaceAll (',' , '');
     } ,
     
@@ -27,9 +56,12 @@ const lorem = {
         this.loremToArray();
 
         let indexes = this.getIndex (count);
-        
-        return indexes.join(' ');
+
+        return indexes.join (' ');
     }
 }
 
+
 document.getElementById('footer').innerHTML = lorem.genLorem(3);
+
+alert ('{ Ok }');
