@@ -11,8 +11,7 @@ const lorem = {
         let result = [];
         
         for (var i = 0; i < count; i++) {
-//            result [i] = extractCondition (minLen , maxLen);
-            result [i] = 'AAA';
+            result [i] = this.extractCondition (minLen , maxLen);
         }
         
         return result;
@@ -21,11 +20,11 @@ const lorem = {
     extractCondition : function (minLen , maxLen) {
         let counter = 0;
         
+        let word = '';
+        
         if (minLen == 0 && maxLen == 0) {
             return this.loremIpsum[this.randPos()];
         } else if (minLen != 0 && maxLen == 0) {
-            let word = 'lorem';
-            
             do {
                 word = this.loremIpsum [this.randPos()];
                 
@@ -33,10 +32,28 @@ const lorem = {
                 if (++counter > 1000) {
                     break;
                 }
-            } while (word.length <= minLen);
-            
-            return word;
+            } while (word.length < minLen);
+        } else if (minLen == 0 && maxLen != 0) {
+            do {
+                word = this.loremIpsum [this.randPos()];
+                
+                /* infinity control */
+                if (++counter > 1000) {
+                    break;
+                }
+            } while (word.length > maxLen);
+        } else if (minLen != 0 && maxLen != 0) {
+            do {
+                word = this.loremIpsum [this.randPos()];
+                
+                /* infinity control */
+                if (++counter > 1000) {
+                    break;
+                }
+            } while (word.length < minLen  || word.length > maxLen);
         }
+        
+        return word;
     } ,
     
     randPos : function () {
@@ -52,16 +69,11 @@ const lorem = {
     /**
      * Generate Lorem Ipsum
      */
-    genLorem : function (count = 1){
+    genLorem : function (count = 1 , minLen = 0 , maxLen = 0){
         this.loremToArray();
 
-        let indexes = this.getIndex (count);
+        let indexes = this.getIndex (count , minLen , maxLen);
 
         return indexes.join (' ');
     }
 }
-
-
-document.getElementById('footer').innerHTML = lorem.genLorem(3);
-
-alert ('{ Ok }');
