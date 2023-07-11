@@ -78,3 +78,5 @@ const status = {
         this.mistake++;
     }
 };
+
+window.alert(status.gameFlow);
