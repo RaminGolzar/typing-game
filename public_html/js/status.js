@@ -27,7 +27,7 @@ const status = {
      * @param {string} status <p>Allowed: stop , play , pause</p>
      * @type type
      */
-    set setFlow (status) {
+    setFlow : function (status) {
         if (status === 'stop' || status === 'play' || status === 'pause') {
             this.gameFlow = status;
         }
@@ -38,7 +38,7 @@ const status = {
      * 
      * @type type
      */
-    set levelPlus () {
+    levelPlus : function () {
         this.level++;
     } ,
     
@@ -47,7 +47,7 @@ const status = {
      * 
      * @type type
      */
-    set timePlus () {
+    timePlus : function () {
         this.time++;
     } ,
     
@@ -56,7 +56,7 @@ const status = {
      * 
      * @type type
      */
-    set wordPlus () {
+    wordPlus : function () {
         this.word++;
     } ,
     
@@ -65,7 +65,7 @@ const status = {
      * 
      * @type type
      */
-    set charPlus () {
+    charPlus : function () {
         this.char++;
     } ,
     
@@ -74,9 +74,7 @@ const status = {
      * 
      * @type type
      */
-    set mistakePlus () {
+    mistakePlus : function () {
         this.mistake++;
     }
 };
-
-window.alert(status.gameFlow);
