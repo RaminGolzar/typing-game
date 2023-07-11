@@ -68,6 +68,8 @@ const lorem = {
     
     /**
      * Generate Lorem Ipsum
+     * 
+     * return type: string
      */
     genLorem : function (count = 1 , minLen = 0 , maxLen = 0){
         this.loremToArray();
