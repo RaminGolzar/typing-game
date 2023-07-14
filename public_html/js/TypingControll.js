@@ -6,13 +6,25 @@ $(document).ready (function () {
 //        $('title').text(ss.charCodeAt(2) - 32);
 //    });
     
-    const TypingControl = {
+    const TypingControll = {
         subtractAsciiFromUtf_16 : 32 ,
         gameBox : document.getElementById ('game-box'); ,
         textBlock : document.getElementById ('text-block'); ,
-        timesRed : 0 ,
+        redSign : 0 ,
         
+        /**
+         * Generate lorem ipsum
+         */
+        genLorem : function () {
+            lorem.genLorem(status.level);
+        } ,
         
+        keyPress : function () {
+            window.alert($('text-block').next().text());
+            window.alert($('text-block').next().text());
+            window.alert($('text-block').next().text());
+        } ,
     };
 });
 
+typingControll.keyPress();
