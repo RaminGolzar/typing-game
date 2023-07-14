@@ -8,8 +8,8 @@ $(document).ready (function () {
     
     const TypingControll = {
         subtractAsciiFromUtf_16 : 32 ,
-        gameBox : document.getElementById ('game-box'); ,
-        textBlock : document.getElementById ('text-block'); ,
+        gameBox : document.getElementById ('game-box') ,
+        textBlock : document.getElementById ('text-block') ,
         redSign : 0 ,
         
         /**
@@ -20,11 +20,14 @@ $(document).ready (function () {
         } ,
         
         keyPress : function () {
-            window.alert($('text-block').next().text());
-            window.alert($('text-block').next().text());
-            window.alert($('text-block').next().text());
-        } ,
+            let elem = $('#text-block').children ().first ();
+//            alert (elem.text());
+//            alert (elem.next().text());
+//            alert (elem.next().text());
+alert ($('#text-block').children().length);
+        } 
     };
+    
+    TypingControll.keyPress();
 });
 
-typingControll.keyPress();
