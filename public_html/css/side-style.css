@@ -50,3 +50,18 @@ h1 span:first-child {
 	border: 2px solid #3c3;
 	background: linear-gradient(to bottom , #6a6 45% , #373 55%);
 }
+
+.current-char {
+    text-decoration: underline;
+    color: white;
+}
+
+.mistake-char {
+    color: red;
+    text-decoration: none;
+}
+
+.other-char {
+    text-decoration: none;
+    color: #ccc;
+}
