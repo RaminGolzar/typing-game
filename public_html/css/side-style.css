@@ -65,3 +65,7 @@ h1 span:first-child {
     text-decoration: none;
     color: #ccc;
 }
+
+#text-block {
+    position: relative;
+}
