@@ -8,26 +8,55 @@ $(document).ready (function () {
     
     const TypingControll = {
         subtractAsciiFromUtf_16 : 32 ,
-        gameBox : document.getElementById ('game-box') ,
-        textBlock : document.getElementById ('text-block') ,
+        gameBox : $('#game-box') ,
+        textBlock : $('#text-block') ,
         redSign : 0 ,
+        
+        /**
+         * Allowed: start , typing , typed , endTime
+         */
+        textBlockState : 'start' , 
+        textBlockStartTime : 0 ,
         
         /**
          * Generate lorem ipsum
          */
         genLorem : function () {
-            lorem.genLorem(status.level);
+            /* ToDo: uncomment belove line & delete next line */
+//            lorem.genLorem(status.level);
+            return lorem.genLorem(3);
         } ,
         
         keyPress : function () {
-            let elem = $('#text-block').children ().first ();
-//            alert (elem.text());
-//            alert (elem.next().text());
-//            alert (elem.next().text());
-alert ($('#text-block').children().length);
+            if (this.textBlockState === 'start' || this.textBlockState === 'endTime' || this.textBlockState === 'typed') {
+                this.newTextBlock ();
+            }
+        } ,
+        
+        /**
+         * Generate a new text block
+         * 
+         * @returns {undefined}
+         */
+        newTextBlock : function () {
+            this.textBlock.stop()
+//                .css ({top : '0px'})
+//                .html (this.genLorem())
+                .animate ({top : '+=210'}, 7000,function(){
+                    this.stopTextBlock ();
+                    /* ToDo: set a red sign */
+                });
+        } ,
+        
+        stopTextBlock : function () {
+            this.textBlock.stop();
         } 
     };
     
     TypingControll.keyPress();
+    
+    $('body').click(function() {
+        TypingControll.newTextBlock();
+    });
 });
 
