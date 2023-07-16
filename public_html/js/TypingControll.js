@@ -8,28 +8,39 @@ $(document).ready (function () {
     
     const TypingControll = {
         subtractAsciiFromUtf_16 : 32 ,
+        
         gameBox : $('#game-box') ,
+        
         textBlock : $('#text-block') ,
+        
         redSign : 0 ,
         
         /**
          * Allowed: start , typing , typed , endTime
          */
         textBlockState : 'start' , 
-        textBlockStartTime : 0 ,
+        
+        typingStartTime : 0 ,
+        
+        typingTimeout = 7000;
         
         /**
          * Generate lorem ipsum
          */
         genLorem : function () {
-            /* ToDo: uncomment belove line & delete next line */
-//            lorem.genLorem(status.level);
-            return lorem.genLorem(3);
+            return lorem.genLorem(status.level);
         } ,
         
         keyPress : function () {
+            alert (this.textBlockState);
+            
             if (this.textBlockState === 'start' || this.textBlockState === 'endTime' || this.textBlockState === 'typed') {
                 this.newTextBlock ();
+            } else { /* the state is typing */
+                if (this.checkTypingTimeout()) {
+                    this.STBS ('endTime');
+                    this.newTextBlock();
+                }
             }
         } ,
         
@@ -39,24 +50,62 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         newTextBlock : function () {
+            this.STBS ('typing');
+            
+            this.setTypingStartTime ();
+            
             this.textBlock.stop()
-//                .css ({top : '0px'})
-//                .html (this.genLorem())
+                .css ({top : '0px'})
+                .html (this.genLorem())
+                /* ToDo: replace 7000 with a variable */
                 .animate ({top : '+=210'}, 7000,function(){
-                    this.stopTextBlock ();
+                    this.textBlock.stop();
+                    
                     /* ToDo: set a red sign */
                 });
         } ,
         
-        stopTextBlock : function () {
-            this.textBlock.stop();
+        /**
+         * STBS stands for "Set Text Block State"
+         * 
+         * @param {string} state
+         * @returns {TypingControllL#1.TypingControll.STBS}
+         */
+        STBS : function (state) {
+            if (state === 'start' || state === 'typing' || state === 'typed' || state === 'endTime') {
+                this.textBlockState = state;
+            }
+        } ,
+        
+        /**
+         * Set typing start time in second
+         * 
+         * @returns {undefined}
+         */
+        setTypingStartTime : function () {
+            let currentTime = new Date();
+            
+            this.typingStartTimeSecond = currentTime.getTime();
+        } ,
+        
+        /**
+         * Return true, if time has expired
+         * 
+         * @returns {Boolean}
+         */
+        checkTypingTimeout : function () {
+            if (this.typingStartTimeSecond > this.typingTimeout) {
+                return true;
+            } else {
+                return false;
+            }
         } 
     };
     
-    TypingControll.keyPress();
+//    TypingControll.keyPress();
     
-    $('body').click(function() {
-        TypingControll.newTextBlock();
+    $('body').keypress(function() {
+        TypingControll.keyPress ();
     });
 });
 
