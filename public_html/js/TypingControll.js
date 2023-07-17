@@ -22,7 +22,7 @@ $(document).ready (function () {
         
         typingStartTime : 0 ,
         
-        typingTimeout = 7000;
+        typingTimeout : 7000 ,
         
         /**
          * Generate lorem ipsum
