@@ -94,7 +94,11 @@ $(document).ready (function () {
          * @returns {Boolean}
          */
         checkTypingTimeout : function () {
-            if (this.typingStartTimeSecond > this.typingTimeout) {
+            let currentTime = new Date();
+            
+            let timeOut = this.typingStartTimeSecond + this.typingTimeout;
+            
+            if (timeOut < currentTime.getTime()) {
                 return true;
             } else {
                 return false;
