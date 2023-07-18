@@ -34,7 +34,10 @@ $(document).ready (function () {
             
             this.currentCharIndex = 0;
             
-            return loremIpsum;
+            /* embed the lorem ipsum to span tag */
+            loremIpsum = embed.run (loremIpsum);
+            
+            return loremIpsum.toString();
         } ,
         
         keyPress : function () {
@@ -57,9 +60,6 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         newTextBlock : function () {
-            
-//            this.textBlock.children().eq(1).addClass ('not-typed');
-            
             this.STBS ('typing');
             
             this.setTypingStartTime ();
@@ -73,8 +73,6 @@ $(document).ready (function () {
                     
                     /* ToDo: set a red sign */
                 });
-                
-                
         } ,
         
         /**
@@ -122,12 +120,12 @@ $(document).ready (function () {
         currentCharIndex : null ,
         
         typing : function () {
-            alert (this.textBlockLength);
+            this.textBlock.children ().addClass ('w3-xxlarge');
         } ,
         
         scrollCharacter : function () {
         
-    } ,
+        } 
     };
     
 //    TypingControll.keyPress();
