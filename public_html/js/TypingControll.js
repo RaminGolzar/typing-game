@@ -28,19 +28,26 @@ $(document).ready (function () {
          * Generate lorem ipsum
          */
         genLorem : function () {
-            return lorem.genLorem(status.level);
+            let loremIpsum = lorem.genLorem(status.level);
+            
+            this.textBlockLength = loremIpsum.length;
+            
+            this.currentCharIndex = 0;
+            
+            return loremIpsum;
         } ,
         
         keyPress : function () {
-            alert (this.textBlockState);
-            
             if (this.textBlockState === 'start' || this.textBlockState === 'endTime' || this.textBlockState === 'typed') {
                 this.newTextBlock ();
             } else { /* the state is typing */
                 if (this.checkTypingTimeout()) {
                     this.STBS ('endTime');
                     this.newTextBlock();
+                } else {
+                    this.typing();
                 }
+
             }
         } ,
         
@@ -50,6 +57,9 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         newTextBlock : function () {
+            
+//            this.textBlock.children().eq(1).addClass ('not-typed');
+            
             this.STBS ('typing');
             
             this.setTypingStartTime ();
@@ -63,6 +73,8 @@ $(document).ready (function () {
                     
                     /* ToDo: set a red sign */
                 });
+                
+                
         } ,
         
         /**
@@ -103,7 +115,19 @@ $(document).ready (function () {
             } else {
                 return false;
             }
-        } 
+        } ,
+        
+        textBlockLength : 0 ,
+        
+        currentCharIndex : null ,
+        
+        typing : function () {
+            alert (this.textBlockLength);
+        } ,
+        
+        scrollCharacter : function () {
+        
+    } ,
     };
     
 //    TypingControll.keyPress();
