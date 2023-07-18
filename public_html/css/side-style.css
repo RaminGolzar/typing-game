@@ -57,13 +57,13 @@ h1 span:first-child {
 }
 
 .mistake-char {
-    color: red;
     text-decoration: none;
+    color: red;
 }
 
 .typed-char {
     text-decoration: none;
-    color: #ccc;
+    color: #bbb;
 }
 
 .not-typed {

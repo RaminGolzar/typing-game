@@ -42,7 +42,7 @@ $(document).ready (function () {
         } ,
         
         keyPress : function () {
-            if (this.textBlockState === 'start' || this.textBlockState === 'endTime' || this.textBlockState === 'typed') {
+            if (this.textBlockState === 'start' || this.textBlockState === 'endTime') {
                 this.newTextBlock ();
             } else { /* the state is typing */
                 if (this.checkTypingTimeout()) {
@@ -74,6 +74,9 @@ $(document).ready (function () {
                     
                     /* ToDo: set a red sign */
                 });
+            
+            /* set default style for textBlock */
+            this.textBlock.children().addClass ('not-typed');
         } ,
         
         /**
@@ -121,7 +124,7 @@ $(document).ready (function () {
         currentCharIndex : null ,
         
         typing : function () {
-            this.textBlock.children ().addClass ('w3-xxlarge');
+            
         } ,
         
         scrollCharacter : function () {
