@@ -61,9 +61,14 @@ h1 span:first-child {
     text-decoration: none;
 }
 
-.other-char {
+.typed-char {
     text-decoration: none;
     color: #ccc;
+}
+
+.not-typed {
+    text-decoration: none;
+    color: #fff;
 }
 
 #text-block {
