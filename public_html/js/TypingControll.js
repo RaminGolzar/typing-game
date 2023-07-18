@@ -48,11 +48,12 @@ $(document).ready (function () {
                 if (this.checkTypingTimeout()) {
                     this.STBS ('endTime');
                     this.newTextBlock();
-                } else {
-                    this.typing();
-                }
+                } // else {
+                    
+                // }
 
             }
+            this.typing();
         } ,
         
         /**
@@ -64,6 +65,8 @@ $(document).ready (function () {
             this.STBS ('typing');
             
             this.setTypingStartTime ();
+            
+            this.resetScrollChar ();
             
             this.textBlock.stop()
                 .css ({top : '0px'})
@@ -121,14 +124,37 @@ $(document).ready (function () {
         
         textBlockLength : 0 ,
         
-        currentCharIndex : null ,
+        currentCharIndex : -1 ,
+        
+        charCode : null ,
         
         typing : function () {
-            
+            this.scrollCharacter();
         } ,
         
         scrollCharacter : function () {
+            this.currentCharIndex++;
+            
+            if (this.currentCharIndex < this.textBlockLength) {
+                this.getChar (this.currentCharIndex);
+            } else {
+                
+            }
+        } ,
         
+        getChar : function (charIndex) {
+            this.charCode = this.textBlock.children()
+                .eq (charIndex)
+                .text ()
+                .charCodeAt (0);
+            
+            alert (this.charCode);
+        } ,
+        
+        resetScrollChar : function () {
+            this.currentCharIndex = -1;
+            
+            this.charCode = null;
         } 
     };
     
