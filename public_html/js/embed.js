@@ -10,7 +10,6 @@ const embed = {
      * @returns {String}
      */
     run : function (loremIpsum) {
-        alert ('{ Ok }');
         let exploded = this.explode (loremIpsum);
 
         let embed = this.embeding (exploded);

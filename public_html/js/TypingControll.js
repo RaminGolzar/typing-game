@@ -1,3 +1,5 @@
+/* global embed, lorem */
+
 $(document).ready (function () {
 //    $('body').keyup (function(e) {
 //        $('title').text(e.keyCode);
@@ -34,10 +36,9 @@ $(document).ready (function () {
             
             this.currentCharIndex = 0;
             
-            /* embed the lorem ipsum to span tag */
             loremIpsum = embed.run (loremIpsum);
             
-            return loremIpsum.toString();
+            return loremIpsum;
         } ,
         
         keyPress : function () {
