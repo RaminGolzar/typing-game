@@ -78,6 +78,6 @@ const lorem = {
 
         let indexes = this.getIndex (count , minLen , maxLen);
 
-        return indexes.join (' ');
+        return indexes.join (' ').toLowerCase ();
     }
 };
