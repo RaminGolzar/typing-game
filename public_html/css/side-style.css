@@ -51,23 +51,23 @@ h1 span:first-child {
 	background: linear-gradient(to bottom , #6a6 45% , #373 55%);
 }
 
-.current-char {
-    text-decoration: underline;
+.ss-current-char {
     color: white;
+    font-weight: bold;
 }
 
-.mistake-char {
-    text-decoration: none;
+.ss-mistake-char {
+    font-weight: normal;
     color: red;
 }
 
-.typed-char {
-    text-decoration: none;
-    color: #bbb;
+.ss-typed-char {
+    font-weight: normal;
+    color: #aaa;
 }
 
-.not-typed {
-    text-decoration: none;
+.ss-not-typed-char {
+    font-weight: normal;
     color: #fff;
 }
 
