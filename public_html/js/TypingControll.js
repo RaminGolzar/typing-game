@@ -130,7 +130,7 @@ $(document).ready (function () {
         
         typing : function (keyEvent) {
             this.setKeyCode (keyEvent);
-            alert (this.keyCode);
+            
             this.scrollCharacter ();
         } ,
         
@@ -170,8 +170,18 @@ $(document).ready (function () {
         } ,
         
         comparisonChar : function () {
-//            alert (this.charCode);
-            alert (this.keyCode);
+            if (this.keyCode == this.charCode) {
+                this.textBlock
+                    .children()
+                    .eq (this.currentCharIndex)
+                    .addClass ('ss-typed-char');
+            } else {
+                this.textBlock
+                    .children()
+                    .eq (this.currentCharIndex)
+                    .addClass ('ss-mistake-char');
+            }
+
         } ,
         
         typedChar : function () {
