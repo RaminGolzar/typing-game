@@ -126,26 +126,56 @@ $(document).ready (function () {
         
         charCode : null ,
         
+        keyCode : null ,
+        
         typing : function (keyEvent) {
-            this.scrollCharacter();
+            this.setKeyCode (keyEvent);
+            alert (this.keyCode);
+            this.scrollCharacter ();
+        } ,
+        
+        /**
+         * Setting the appropriate keycode in the keyCode property
+         * 
+         * @param {event} keyEvent
+         * @returns {undefined}
+         */
+        setKeyCode : function (keyEvent) {
+            let keyCode = keyEvent.keyCode;
+           
+            if (keyCode >= 97 && keyCode <= 122) {
+                this.keyCode = keyCode - this.subtractAsciiFromUtf_16;
+            } else {
+                this.keyCode = keyCode;
+            }
         } ,
         
         scrollCharacter : function () {
             this.currentCharIndex++;
             
             if (this.currentCharIndex < this.textBlockLength) {
-                this.getChar (this.currentCharIndex);
+                this.currentChar (this.currentCharIndex);
+                this.comparisonChar ();
             } else {
-                
+                /* todo */
             }
         } ,
         
-        getChar : function (charIndex) {
+        currentChar : function (charIndex) {
             let element = this.textBlock.children().eq (charIndex);
             
             this.charCode = element.text ().charCodeAt (0);
             
             element.addClass ('ss-current-char');
+        } ,
+        
+        comparisonChar : function () {
+//            alert (this.charCode);
+            alert (this.keyCode);
+        } ,
+        
+        typedChar : function () {
+            
         } ,
         
         resetScrollChar : function () {
@@ -157,7 +187,7 @@ $(document).ready (function () {
     
 //    TypingControll.keyPress();
     
-    $('body').keypress(function(keyEvent) {
+    $('body').keypress(function (keyEvent) {
         TypingControll.keyPress (keyEvent);
     });
 });
