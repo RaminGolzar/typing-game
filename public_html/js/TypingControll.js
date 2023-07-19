@@ -34,14 +34,12 @@ $(document).ready (function () {
             
             this.textBlockLength = loremIpsum.length;
             
-            this.currentCharIndex = 0;
-            
             loremIpsum = embed.run (loremIpsum);
             
             return loremIpsum;
         } ,
         
-        keyPress : function () {
+        keyPress : function (keyEvent) {
             if (this.textBlockState === 'start' || this.textBlockState === 'endTime') {
                 this.newTextBlock ();
             } else { /* the state is typing */
@@ -49,11 +47,11 @@ $(document).ready (function () {
                     this.STBS ('endTime');
                     this.newTextBlock();
                 } // else {
-                    
+                    /* ToDo: delete this else block */
                 // }
 
             }
-            this.typing();
+            this.typing (keyEvent);
         } ,
         
         /**
@@ -128,7 +126,7 @@ $(document).ready (function () {
         
         charCode : null ,
         
-        typing : function () {
+        typing : function (keyEvent) {
             this.scrollCharacter();
         } ,
         
@@ -143,25 +141,24 @@ $(document).ready (function () {
         } ,
         
         getChar : function (charIndex) {
-            this.charCode = this.textBlock.children()
-                .eq (charIndex)
-                .text ()
-                .charCodeAt (0);
+            let element = this.textBlock.children().eq (charIndex);
             
-            alert (this.charCode);
+            this.charCode = element.text ().charCodeAt (0);
+            
+            element.addClass ('ss-current-char');
         } ,
         
         resetScrollChar : function () {
             this.currentCharIndex = -1;
-            
-            this.charCode = null;
         } 
+        
+        
     };
     
 //    TypingControll.keyPress();
     
-    $('body').keypress(function() {
-        TypingControll.keyPress ();
+    $('body').keypress(function(keyEvent) {
+        TypingControll.keyPress (keyEvent);
     });
 });
 
