@@ -141,13 +141,7 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         setKeyCode : function (keyEvent) {
-            let keyCode = keyEvent.keyCode;
-           
-            if (keyCode >= 97 && keyCode <= 122) {
-                this.keyCode = keyCode - this.subtractAsciiFromUtf_16;
-            } else {
-                this.keyCode = keyCode;
-            }
+            this.keyCode = keyEvent.keyCode;
         } ,
         
         scrollCharacter : function () {
