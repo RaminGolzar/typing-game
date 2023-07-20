@@ -42,16 +42,12 @@ $(document).ready (function () {
         keyPress : function (keyEvent) {
             if (this.textBlockState === 'start' || this.textBlockState === 'endTime') {
                 this.newTextBlock ();
-            } else { /* the state is typing */
-                if (this.checkTypingTimeout()) {
-                    this.STBS ('endTime');
-                    this.newTextBlock();
-                } // else {
-                    /* ToDo: delete this else block */
-                // }
-
+            } else if (this.textBlockState == 'typing' && this.checkTypingTimeout ()) {
+                this.STBS ('endTime');
+                this.newTextBlock();
+            } else if (this.textBlockState == 'typing' && !this.checkTypingTimeout ()) {
+                this.typing (keyEvent);
             }
-            this.typing (keyEvent);
         } ,
         
         /**
@@ -76,8 +72,10 @@ $(document).ready (function () {
                     /* ToDo: set a red sign */
                 });
             
-            /* set default style for textBlock */
-            this.textBlock.children().addClass ('not-typed');
+            /* set default style for all children of textBlock */
+            let allChar = this.textBlock.children();
+            
+            this.setClass (allChar , 'ss-not-typed-char');
         } ,
         
         /**
@@ -131,7 +129,7 @@ $(document).ready (function () {
         typing : function (keyEvent) {
             this.setKeyCode (keyEvent);
             
-            this.scrollCharacter ();
+            this.scrollChar ();
         } ,
         
         /**
@@ -144,7 +142,7 @@ $(document).ready (function () {
             this.keyCode = keyEvent.keyCode;
         } ,
         
-        scrollCharacter : function () {
+        scrollChar : function () {
             this.currentCharIndex++;
             
             if (this.currentCharIndex < this.textBlockLength) {
@@ -160,20 +158,22 @@ $(document).ready (function () {
             
             this.charCode = element.text ().charCodeAt (0);
             
-            element.addClass ('ss-current-char');
+            this.setClass (element , 'ss-current-char');
         } ,
         
         comparisonChar : function () {
             if (this.keyCode == this.charCode) {
                 this.textBlock
                     .children()
-                    .eq (this.currentCharIndex)
-                    .addClass ('ss-typed-char');
+                    .eq (this.currentCharIndex);
+                    
+                    this.setClass (this.textBlock , 'ss-typed-char');
             } else {
                 this.textBlock
                     .children()
-                    .eq (this.currentCharIndex)
-                    .addClass ('ss-mistake-char');
+                    .eq (this.currentCharIndex);
+                    
+                    this.setClass (this.textBlock , 'ss-mistake-char');
             }
 
         } ,
@@ -184,6 +184,24 @@ $(document).ready (function () {
         
         resetScrollChar : function () {
             this.currentCharIndex = -1;
+        } ,
+        
+        /**
+         * Set a css class for one character
+         * 
+         * @param {object} element
+         * @param {string} className
+         * @returns {undefined}
+         */
+        setClass : function (element , className) {
+            let classesNames = 'ss-current-char ss-mistake-char ss-typed-char ss-not-typed-char';
+            
+            element.removeClass ('ss-current-char');
+            element.removeClass ('ss-mistake-char');
+            element.removeClass ('ss-typed-char');
+            element.removeClass ('ss-not-typed-char');
+            
+            element.addClass (className);
         } 
         
         
