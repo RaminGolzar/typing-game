@@ -52,13 +52,13 @@ h1 span:first-child {
 }
 
 .ss-current-char {
-    color: white;
+    color: green;
     font-weight: bold;
 }
 
 .ss-mistake-char {
     font-weight: normal;
-    color: red;
+    color: #f58;
 }
 
 .ss-typed-char {
@@ -68,7 +68,7 @@ h1 span:first-child {
 
 .ss-not-typed-char {
     font-weight: normal;
-    color: #fff;
+    color: orange;
 }
 
 #text-block {
