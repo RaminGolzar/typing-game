@@ -15,8 +15,6 @@ $(document).ready (function () {
         
         textBlock : $('#text-block') ,
         
-        redSign : 0 ,
-        
         /**
          * Allowed: start , typing , typed , endTime
          */
@@ -24,7 +22,7 @@ $(document).ready (function () {
         
         typingStartTime : 0 ,
         
-        typingTimeout : 7000 ,
+        typingTimeout : 1000 ,
         
         /**
          * Generate lorem ipsum
@@ -44,7 +42,7 @@ $(document).ready (function () {
                 this.newTextBlock ();
             } else if (this.textBlockState == 'typing' && this.checkTypingTimeout ()) {
                 this.STBS ('endTime');
-                this.newTextBlock();
+                this.recordRedSign ();
             } else if (this.textBlockState == 'typing' && !this.checkTypingTimeout ()) {
                 this.typing (keyEvent);
             }
@@ -62,20 +60,24 @@ $(document).ready (function () {
             
             this.resetScrollChar ();
             
-            this.textBlock.stop()
-                .css ({top : '0px'})
-                .html (this.genLorem())
-                /* ToDo: replace 7000 with a variable */
-                .animate ({top : '+=210'}, 7000,function(){
-                    this.textBlock.stop();
-                    
-                    /* ToDo: set a red sign */
-                });
+            this.runAnimation ();
             
             /* set default style for all children of textBlock */
             let allChar = this.textBlock.children();
             
             this.setClass (allChar , 'ss-not-typed-char');
+            
+            this.currentChar();
+        } ,
+        
+        runAnimation : function () {
+            this.textBlock.stop()
+                .css ({top : '0px'})
+                .html (this.genLorem())
+                .animate ({top : '+=210'}, this.typingTimeout ,function () {
+                    this.textBlockState = 'endTime';
+                    this.textBlock.stop ();
+                });
         } ,
         
         /**
@@ -145,41 +147,51 @@ $(document).ready (function () {
         scrollChar : function () {
             this.currentCharIndex++;
             
-            if (this.currentCharIndex < this.textBlockLength) {
-                this.currentChar (this.currentCharIndex);
+            if (this.currentCharIndex < (this.textBlockLength - 1)) {
+                this.currentChar ();
                 this.comparisonChar ();
             } else {
-                /* todo */
+                this.textBlockState = 'typed';
+                this.newTextBlock();
             }
         } ,
         
-        currentChar : function (charIndex) {
-            let element = this.textBlock.children().eq (charIndex);
+        currentChar : function () {
+            let element = this.getCurrentChar ();
             
-            this.charCode = element.text ().charCodeAt (0);
+            this.setCharCode ();
             
             this.setClass (element , 'ss-current-char');
         } ,
         
-        comparisonChar : function () {
-            if (this.keyCode == this.charCode) {
-                this.textBlock
-                    .children()
-                    .eq (this.currentCharIndex);
-                    
-                    this.setClass (this.textBlock , 'ss-typed-char');
-            } else {
-                this.textBlock
-                    .children()
-                    .eq (this.currentCharIndex);
-                    
-                    this.setClass (this.textBlock , 'ss-mistake-char');
-            }
-
+        getCurrentChar : function () {
+            return this.textBlock
+                .children()
+                .eq (this.currentCharIndex + 1);
         } ,
         
-        typedChar : function () {
-            
+        setCharCode : function () {
+            this.charCode = this.textBlock
+                .children()
+                .eq (this.currentCharIndex)
+                .text ()
+                .charCodeAt (0);
+        } ,
+        
+        comparisonChar : function () {
+            if (this.keyCode == this.charCode) {
+                let specificChar = this.textBlock
+                    .children()
+                    .eq (this.currentCharIndex);
+                        
+                    this.setClass (specificChar , 'ss-typed-char');
+            } else {
+                let ss = this.textBlock
+                    .children()
+                    .eq (this.currentCharIndex);
+
+                    this.setClass (ss , 'ss-mistake-char');
+            }
         } ,
         
         resetScrollChar : function () {
@@ -196,15 +208,48 @@ $(document).ready (function () {
         setClass : function (element , className) {
             let classesNames = 'ss-current-char ss-mistake-char ss-typed-char ss-not-typed-char';
             
-            element.removeClass ('ss-current-char');
-            element.removeClass ('ss-mistake-char');
-            element.removeClass ('ss-typed-char');
-            element.removeClass ('ss-not-typed-char');
+            element.removeClass (classesNames);
             
             element.addClass (className);
-        } 
+        } ,
         
+        /*------------------------------------------------------------------------
+         * Red Sign
+         * -------------------------------------------------------------------------
+         */
         
+        redSignCounter : 0 ,
+        
+        maxRedSign : 3 ,
+        
+        resetRedSign : function () {
+            $('red-sign-1 , red-sign-2 , red-sign-1').removeClass ('w3-text-red');
+            
+            $('red-sign-1 , red-sign-2 , red-sign-1').addClass ('w3-text-white');
+        } ,
+        
+        recordRedSign : function () {
+            this.redSignCounter++;
+            
+            if (this.redSignCounter < this.maxRedSign) {
+                this.redSignAnimation ();
+            
+                this.newTextBlock ();
+            } else { /* game over */
+                /* todo: this code is temporary */
+                this.textBlockState = 'gameOver';
+                
+                this.redSignAnimation ();
+                
+                $('#game-over').fadeIn ();
+            }
+        } ,
+        
+        redSignAnimation : function () {
+            $('#red-sign-' + this.redSignCounter)
+                .removeClass ('w3-text-white')
+                .addClass ('w3-text-red');
+            } 
     };
     
 //    TypingControll.keyPress();
