@@ -22,13 +22,15 @@ $(document).ready (function () {
         
         typingStartTime : 0 ,
         
-        typingTimeout : 1000 ,
+        typingTimeout : 10000 ,
         
         /**
          * Generate lorem ipsum
          */
-        genLorem : function () {
-            let loremIpsum = lorem.genLorem(status.level);
+        genLorem : function (wordCount = 1 , minLen = 0 , maxLen = 0) {
+            /* todo: uncomment belove line & delete the next line */
+//            let loremIpsum = lorem.genLorem(status.level);
+            let loremIpsum = lorem.genLorem (1 , 2 , 4);
             
             this.textBlockLength = loremIpsum.length;
             
@@ -67,13 +69,13 @@ $(document).ready (function () {
             
             this.setClass (allChar , 'ss-not-typed-char');
             
-            this.currentChar();
+            this.currentCharAction ();
         } ,
         
         runAnimation : function () {
             this.textBlock.stop()
                 .css ({top : '0px'})
-                .html (this.genLorem())
+                .html (this.genLorem(2))
                 .animate ({top : '+=210'}, this.typingTimeout ,function () {
                     this.textBlockState = 'endTime';
                     this.textBlock.stop ();
@@ -131,7 +133,11 @@ $(document).ready (function () {
         typing : function (keyEvent) {
             this.setKeyCode (keyEvent);
             
-            this.scrollChar ();
+            this.nextChar ();
+            
+            this.recording ();
+            
+            this.compareOrNew ();
         } ,
         
         /**
@@ -144,11 +150,24 @@ $(document).ready (function () {
             this.keyCode = keyEvent.keyCode;
         } ,
         
-        scrollChar : function () {
+        /**
+         * Increment the currentCharIndex property
+         * 
+         * @returns {undefined}]
+         */
+        nextChar : function () {
             this.currentCharIndex++;
-            
-            if (this.currentCharIndex < (this.textBlockLength - 1)) {
-                this.currentChar ();
+        } ,
+        
+        /**
+         * distinguishing between, the act of analogy 
+         * or the new case
+         * 
+         * @returns {undefined}
+         */
+        compareOrNew : function () {
+            if (this.checkCharIndex (false)) {
+                this.currentCharAction ();
                 this.comparisonChar ();
             } else {
                 this.textBlockState = 'typed';
@@ -156,7 +175,27 @@ $(document).ready (function () {
             }
         } ,
         
-        currentChar : function () {
+        /**
+         * Checking the char index based on length of 
+         * the textBlock
+         * 
+         * @param {boolean} lessThanOrEqual
+         * @returns {Boolean}
+         */
+        checkCharIndex : function (lessThanOrEqual) {
+            if (lessThanOrEqual) {
+                return this.currentCharIndex <= (this.textBlockLength - 1) ? true : false;
+            } else {
+                return this.currentCharIndex < (this.textBlockLength - 1) ? true : false;
+            }
+        } ,
+        
+        /**
+         * Perform actions on current character
+         * 
+         * @returns {undefined}
+         */
+        currentCharAction : function () {
             let element = this.getCurrentChar ();
             
             this.setCharCode ();
@@ -164,12 +203,23 @@ $(document).ready (function () {
             this.setClass (element , 'ss-current-char');
         } ,
         
+        /**
+         * Get html element of current character
+         * 
+         * @returns {unresolved}
+         */
         getCurrentChar : function () {
             return this.textBlock
                 .children()
                 .eq (this.currentCharIndex + 1);
         } ,
         
+        /**
+         * Setting the character code according to 
+         * the current character
+         * 
+         * @returns {undefined}
+         */
         setCharCode : function () {
             this.charCode = this.textBlock
                 .children()
@@ -178,22 +228,41 @@ $(document).ready (function () {
                 .charCodeAt (0);
         } ,
         
+        /**
+         * Setting the appropriate style for typed character
+         * 
+         * @returns {undefined}
+         */
         comparisonChar : function () {
-            if (this.keyCode == this.charCode) {
+            if (this.codeValidation ()) {
                 let specificChar = this.textBlock
                     .children()
                     .eq (this.currentCharIndex);
                         
-                    this.setClass (specificChar , 'ss-typed-char');
+                this.setClass (specificChar , 'ss-typed-char');
             } else {
-                let ss = this.textBlock
-                    .children()
+                let element = this.textBlock
+                    .children ()
                     .eq (this.currentCharIndex);
 
-                    this.setClass (ss , 'ss-mistake-char');
+                this.setClass (element , 'ss-mistake-char');
             }
         } ,
         
+        /**
+         * Validation keys pressed from the keyboard
+         * 
+         * @returns {Boolean}
+         */
+        codeValidation : function () {
+            return this.keyCode == this.charCode ? true : false;
+        } ,
+        
+        /**
+         * Reset the currentCharIndex property
+         * 
+         * @returns {undefined}
+         */
         resetScrollChar : function () {
             this.currentCharIndex = -1;
         } ,
@@ -222,12 +291,22 @@ $(document).ready (function () {
         
         maxRedSign : 3 ,
         
+        /**
+         * Reset the red sign style
+         * 
+         * @returns {undefined}
+         */
         resetRedSign : function () {
             $('red-sign-1 , red-sign-2 , red-sign-1').removeClass ('w3-text-red');
             
             $('red-sign-1 , red-sign-2 , red-sign-1').addClass ('w3-text-white');
         } ,
         
+        /**
+         * Recording a red sign
+         * 
+         * @returns {undefined}
+         */
         recordRedSign : function () {
             this.redSignCounter++;
             
@@ -245,11 +324,121 @@ $(document).ready (function () {
             }
         } ,
         
+        /**
+         * Set a style for a red sign
+         * 
+         * @returns {undefined}
+         */
         redSignAnimation : function () {
             $('#red-sign-' + this.redSignCounter)
                 .removeClass ('w3-text-white')
                 .addClass ('w3-text-red');
-            } 
+        } ,
+        
+        /*----------------------------------------------------------------------
+         * Record Statistics
+         * --------------------------------------------------------------------
+         */
+        
+        charCounter : 0 ,
+        
+        wordCounter : 0 ,
+        
+        mistakeCounter : 0 ,
+        
+        recording : function () {
+            if (! this.checkCharIndex (true)) {
+                return;
+            }
+            
+            this.currentCharAction ();
+            
+            if (this.codeValidation ()) {
+                this.recordStatistics ('char');
+                
+                this.detectionRecordWord ();
+            } else {
+                this.recordStatistics ('mistake');
+            }
+        } ,
+        
+        /**
+         * Record all types of statistics
+         * 
+         * @param {type} item
+         * @returns {undefined}
+         */
+        recordStatistics : function (item) {
+            switch (item) {
+                case 'mistake':
+                    this.recordMistake (); 
+                    break;
+                case 'word':
+                    this.recordWord (); 
+                    break;
+                case 'char':
+                    this.recordChar (); 
+                    break;
+            }
+        } ,
+        
+        /**
+         * Add one to the number of the mistake counter
+         * 
+         * @returns {undefined}
+         */
+        recordMistake : function () {
+            this.mistakeCounter++;
+            $('#mistake-counter').text (this.mistakeCounter);
+        } ,
+        
+        /**
+         * Detection for record word
+         * 
+         * @returns {undefined}
+         */
+        detectionRecordWord : function () {
+            let spaceKeyCode = 32;
+            
+            if (this.keyCode == spaceKeyCode) {
+                this.recordStatistics ('word');
+            }
+        } ,
+        
+        /**
+         * Add one to the number of word counter
+         * 
+         * @returns {undefined}
+         */
+        recordWord : function () {
+            this.wordCounter++;
+            $('#word-counter').text (this.wordCounter);
+        } ,
+        
+        /**
+         * Add one to the number of char counter
+         * 
+         * @returns {undefined}
+         */
+        recordChar : function () {
+            this.charCounter++;
+            $('#char-counter').text (this.charCounter);
+        } ,
+        
+        /**
+         * Reset the statistics counters
+         * 
+         * @returns {undefined}
+         */
+        resetStatistics : function () {
+            this.wordCounter = 0;
+            this.charCounter = 0;
+            this.mistakeCounter = 0;
+            
+            $('#word-counter').text (this.wordCounter);
+            $('#char-counter').text (this.charCounter);
+            $('#mistake-counter').text (this.mistakeCounter);
+        } 
     };
     
 //    TypingControll.keyPress();
