@@ -26,11 +26,16 @@ $(document).ready (function () {
         
         /**
          * Generate lorem ipsum
+         * 
+         * @param {int} wordCount
+         * @param {int} minLen
+         * @param {int} maxLen
+         * @returns {Array|String}
          */
         genLorem : function (wordCount = 1 , minLen = 0 , maxLen = 0) {
             /* todo: uncomment belove line & delete the next line */
 //            let loremIpsum = lorem.genLorem(status.level);
-            let loremIpsum = lorem.genLorem (1 , 2 , 4);
+            let loremIpsum = lorem.genLorem (3 , 2 , 4);
             
             this.textBlockLength = loremIpsum.length;
             
@@ -42,10 +47,10 @@ $(document).ready (function () {
         keyPress : function (keyEvent) {
             if (this.textBlockState === 'start' || this.textBlockState === 'endTime') {
                 this.newTextBlock ();
-            } else if (this.textBlockState == 'typing' && this.checkTypingTimeout ()) {
+            } else if (this.textBlockState === 'typing' && this.checkTypingTimeout ()) {
                 this.STBS ('endTime');
                 this.recordRedSign ();
-            } else if (this.textBlockState == 'typing' && !this.checkTypingTimeout ()) {
+            } else if (this.textBlockState === 'typing' && !this.checkTypingTimeout ()) {
                 this.typing (keyEvent);
             }
         } ,
@@ -56,6 +61,8 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         newTextBlock : function () {
+            this.detectionRecordWord (true);
+            
             this.STBS ('typing');
             
             this.setTypingStartTime ();
@@ -75,7 +82,7 @@ $(document).ready (function () {
         runAnimation : function () {
             this.textBlock.stop()
                 .css ({top : '0px'})
-                .html (this.genLorem(2))
+                .html (this.genLorem (status.level))
                 .animate ({top : '+=210'}, this.typingTimeout ,function () {
                     this.textBlockState = 'endTime';
                     this.textBlock.stop ();
@@ -397,12 +404,30 @@ $(document).ready (function () {
          * 
          * @returns {undefined}
          */
-        detectionRecordWord : function () {
+        detectionRecordWord : function (directRecord = false) {
+            if (directRecord) {
+                if (!this.checkTypingTimeout () && this.textBlockState !== 'start') {
+                    this.recordStatistics ('word');
+                }
+            } else {
+                if (this.spacebarValidation ()) {
+                    this.recordStatistics ('word');
+                }
+            }
+
+        } ,
+        
+        /**
+         * Spacebar validation
+         * 
+         * Returns "true" if the key is valid
+         * 
+         * @returns {Boolean}
+         */
+        spacebarValidation : function () {
             let spaceKeyCode = 32;
             
-            if (this.keyCode == spaceKeyCode) {
-                this.recordStatistics ('word');
-            }
+            return this.keyCode == spaceKeyCode ? true : false;
         } ,
         
         /**
