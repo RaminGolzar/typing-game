@@ -402,6 +402,7 @@ $(document).ready (function () {
         /**
          * Detection for record word
          * 
+         * @param {boolean} directRecord
          * @returns {undefined}
          */
         detectionRecordWord : function (directRecord = false) {
