@@ -348,7 +348,7 @@ $(document).ready (function () {
         recordRedSign : function () {
             this.redSignCounter++;
             
-            if (this.redSignCounter < this.maxRedSign) {
+            if (! this.overflowRedSign ()) {
                 this.redSignAnimation ();
             
                 this.newTextBlock ();
@@ -360,6 +360,15 @@ $(document).ready (function () {
                 
                 $('#game-over').fadeIn ();
             }
+        } ,
+        
+        /**
+         * Return "true", if the red sign has overflowed
+         * 
+         * @returns {Boolean}
+         */
+        overflowRedSign : function () {
+            return this.redSignCounter < this.maxRedSign ? false : true;
         } ,
         
         /**
