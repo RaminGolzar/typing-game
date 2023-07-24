@@ -204,7 +204,7 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         compareOrNew : function () {
-            if (this.checkCharIndex (false)) {
+            if (! this.overflowCharIndex (false)) {
                 this.currentCharAction ();
                 this.comparisonChar ();
             } else {
@@ -220,11 +220,11 @@ $(document).ready (function () {
          * @param {boolean} lessThanOrEqual
          * @returns {Boolean}
          */
-        checkCharIndex : function (lessThanOrEqual) {
+        overflowCharIndex : function (lessThanOrEqual) {
             if (lessThanOrEqual) {
-                return this.currentCharIndex <= (this.textBlockLength - 1) ? true : false;
+                return this.currentCharIndex <= (this.textBlockLength - 1) ? false : true;
             } else {
-                return this.currentCharIndex < (this.textBlockLength - 1) ? true : false;
+                return this.currentCharIndex < (this.textBlockLength - 1) ? false : true;
             }
         } ,
         
@@ -394,7 +394,7 @@ $(document).ready (function () {
         mistakeCounter : 0 ,
         
         recording : function () {
-            if (! this.checkCharIndex (true)) {
+            if (this.overflowCharIndex (true)) {
                 return;
             }
             
