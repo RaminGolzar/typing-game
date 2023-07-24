@@ -49,7 +49,7 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         newTextBlock : function () {
-            this.detectionRecordWord (true);
+            this.recordWord (true);
             
             this.STBS ('typing');
             
@@ -401,31 +401,11 @@ $(document).ready (function () {
             this.currentCharAction ();
             
             if (this.compareCodes ()) {
-                this.recordStatistics ('char');
+                this.recordChar ();
                 
-                this.detectionRecordWord ();
+                this.recordWord ();
             } else {
-                this.recordStatistics ('mistake');
-            }
-        } ,
-        
-        /**
-         * Record all types of statistics
-         * 
-         * @param {type} item
-         * @returns {undefined}
-         */
-        recordStatistics : function (item) {
-            switch (item) {
-                case 'mistake':
-                    this.recordMistake (); 
-                    break;
-                case 'word':
-                    this.recordWord (); 
-                    break;
-                case 'char':
-                    this.recordChar (); 
-                    break;
+                this.recordMistake ();
             }
         } ,
         
@@ -440,22 +420,31 @@ $(document).ready (function () {
         } ,
         
         /**
-         * Detection for record word
+         * Add one to the number of word counter
          * 
          * @param {boolean} directRecord
          * @returns {undefined}
          */
-        detectionRecordWord : function (directRecord = false) {
+        recordWord : function (directRecord = false) {
             if (directRecord) {
                 if (!this.checkTypingTimeout () && this.textBlockState !== 'start') {
-                    this.recordStatistics ('word');
+                    this.incrementWordCounter ();
                 }
             } else {
                 if (this.spacebarValidation ()) {
-                    this.recordStatistics ('word');
+                    this.incrementWordCounter ();
                 }
             }
-
+        } ,
+        
+        /**
+         * Increment the word count counter
+         * 
+         * @returns {undefined}
+         */
+        incrementWordCounter : function () {
+            this.wordCounter++;
+            $('#word-counter').text (this.wordCounter);
         } ,
         
         /**
@@ -469,16 +458,6 @@ $(document).ready (function () {
             let spaceKeyCode = 32;
             
             return this.keyCode == spaceKeyCode ? true : false;
-        } ,
-        
-        /**
-         * Add one to the number of word counter
-         * 
-         * @returns {undefined}
-         */
-        recordWord : function () {
-            this.wordCounter++;
-            $('#word-counter').text (this.wordCounter);
         } ,
         
         /**
