@@ -154,6 +154,8 @@ $(document).ready (function () {
         
         textBlockLength : 0 ,
         
+        currentCharInitValue : -1 ,
+        
         currentCharIndex : -1 ,
         
         charCode : null ,
@@ -300,7 +302,7 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         resetScrollChar : function () {
-            this.currentCharIndex = -1;
+            this.currentCharIndex = this.currentCharInitValue;
         } ,
         
         /**
