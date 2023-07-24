@@ -486,8 +486,8 @@ $(document).ready (function () {
         } 
     };
     
-//    TypingControll.keyPress();
-    
+
+    /* todo: delete belove code */
     $('body').keypress(function (keyEvent) {
         TypingControll.run (keyEvent);
     });
