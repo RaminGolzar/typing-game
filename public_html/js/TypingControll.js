@@ -1,18 +1,7 @@
 /* global embed, lorem */
 
 $(document).ready (function () {
-//    $('body').keyup (function(e) {
-//        $('title').text(e.keyCode);
-//        let ss = 'abc';
-//        let subtractAsciiFromUtf_16 = 32;
-//        $('title').text(ss.charCodeAt(2) - 32);
-//    });
-    
     const TypingControll = {
-        subtractAsciiFromUtf_16 : 32 ,
-        
-        gameBox : $('#game-box') ,
-        
         textBlock : $('#text-block') ,
         
         /**
@@ -25,26 +14,12 @@ $(document).ready (function () {
         typingTimeout : 10000 ,
         
         /**
-         * Generate lorem ipsum
+         * Object initializer function
          * 
-         * @param {int} wordCount
-         * @param {int} minLen
-         * @param {int} maxLen
-         * @returns {Array|String}
+         * @param {object} keyEvent
+         * @returns {undefined}
          */
-        genLorem : function (wordCount = 1 , minLen = 0 , maxLen = 0) {
-            /* todo: uncomment belove line & delete the next line */
-//            let loremIpsum = lorem.genLorem(status.level);
-            let loremIpsum = lorem.genLorem (3 , 2 , 4);
-            
-            this.textBlockLength = loremIpsum.length;
-            
-            loremIpsum = embed.run (loremIpsum);
-            
-            return loremIpsum;
-        } ,
-        
-        keyPress : function (keyEvent) {
+        run : function (keyEvent) {
             if (this.textBlockState === 'start' || this.textBlockState === 'endTime') {
                 this.newTextBlock ();
             } else if (this.textBlockState === 'typing' && this.checkTypingTimeout ()) {
@@ -53,6 +28,19 @@ $(document).ready (function () {
             } else if (this.textBlockState === 'typing' && !this.checkTypingTimeout ()) {
                 this.typing (keyEvent);
             }
+        } ,
+        
+        /**
+         * Generate lorem ipsum
+         * 
+         * @returns {Array|String}
+         */
+        genLorem : function () {
+            let loremIpsum = lorem.genLorem(status.level , 3);
+            
+            this.textBlockLength = loremIpsum.length;
+            
+            return embed.run (loremIpsum);
         } ,
         
         /**
@@ -69,24 +57,56 @@ $(document).ready (function () {
             
             this.resetScrollChar ();
             
-            this.runAnimation ();
-            
-            /* set default style for all children of textBlock */
-            let allChar = this.textBlock.children();
-            
-            this.setClass (allChar , 'ss-not-typed-char');
+            this.textBlockAction ();
             
             this.currentCharAction ();
         } ,
         
+        /**
+         * Perform operations related to the text box
+         * 
+         * @returns {undefined}
+         */
+        textBlockAction : function () {
+            this.runAnimation ();
+            
+            this.newLoremForTextBlock ();
+            
+            this.initStyle ();
+        } ,
+        
+        /**
+         * set default style for all children of textBlock
+         * 
+         * @returns {undefined}
+         */
+        initStyle : function () {
+            let allChar = this.textBlock.children();
+            
+            this.setClass (allChar , 'ss-not-typed-char');
+        } ,
+        
+        /**
+         * Run a animation for the textBlock
+         * 
+         * @returns {undefined}
+         */
         runAnimation : function () {
             this.textBlock.stop()
                 .css ({top : '0px'})
-                .html (this.genLorem (status.level))
                 .animate ({top : '+=210'}, this.typingTimeout ,function () {
                     this.textBlockState = 'endTime';
                     this.textBlock.stop ();
                 });
+        } ,
+        
+        /**
+         * Set new lorem ipsum for the textBlock
+         * 
+         * @returns {undefined}
+         */
+        newLoremForTextBlock : function () {
+            this.textBlock.html (this.genLorem ());
         } ,
         
         /**
@@ -107,9 +127,7 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         setTypingStartTime : function () {
-            let currentTime = new Date();
-            
-            this.typingStartTimeSecond = currentTime.getTime();
+            this.typingStartTimeSecond = this.getCurrentTime ();
         } ,
         
         /**
@@ -118,15 +136,20 @@ $(document).ready (function () {
          * @returns {Boolean}
          */
         checkTypingTimeout : function () {
-            let currentTime = new Date();
-            
             let timeOut = this.typingStartTimeSecond + this.typingTimeout;
             
-            if (timeOut < currentTime.getTime()) {
-                return true;
-            } else {
-                return false;
-            }
+            return timeOut < this.getCurrentTime () ? true : false;
+        } ,
+        
+        /**
+         * Return the current time
+         * 
+         * @returns {Number}
+         */
+        getCurrentTime : function () {
+            let ss = new Date ();
+            
+            return ss.getTime ();
         } ,
         
         textBlockLength : 0 ,
@@ -137,6 +160,12 @@ $(document).ready (function () {
         
         keyCode : null ,
         
+        /**
+         * The act of typing
+         * 
+         * @param {type} keyEvent
+         * @returns {undefined}
+         */
         typing : function (keyEvent) {
             this.setKeyCode (keyEvent);
             
@@ -241,7 +270,7 @@ $(document).ready (function () {
          * @returns {undefined}
          */
         comparisonChar : function () {
-            if (this.codeValidation ()) {
+            if (this.compareCodes ()) {
                 let specificChar = this.textBlock
                     .children()
                     .eq (this.currentCharIndex);
@@ -261,7 +290,7 @@ $(document).ready (function () {
          * 
          * @returns {Boolean}
          */
-        codeValidation : function () {
+        compareCodes : function () {
             return this.keyCode == this.charCode ? true : false;
         } ,
         
@@ -360,7 +389,7 @@ $(document).ready (function () {
             
             this.currentCharAction ();
             
-            if (this.codeValidation ()) {
+            if (this.compareCodes ()) {
                 this.recordStatistics ('char');
                 
                 this.detectionRecordWord ();
@@ -470,7 +499,7 @@ $(document).ready (function () {
 //    TypingControll.keyPress();
     
     $('body').keypress(function (keyEvent) {
-        TypingControll.keyPress (keyEvent);
+        TypingControll.run (keyEvent);
     });
 });
 
