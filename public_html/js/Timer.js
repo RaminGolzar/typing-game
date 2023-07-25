@@ -11,7 +11,7 @@ const Timer = {
     
     startTime : function () {
         let timer = setInterval (function () {
-            this.scheduledWork ();
+            Timer.scheduledWork ();
         } , this.secondKeeper);
     } ,
     
