@@ -75,6 +75,6 @@ h1 span:first-child {
     position: relative;
 }
 
-#game-over {
+#game-over , #you-win {
     display: none;
 }
