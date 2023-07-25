@@ -1,5 +1,9 @@
 const Timer = {
-    timeCounter : 0 ,
+    hTimerCounter : $('#timer-counter') ,
+    
+    hTimerBar : $('#timer-bar') ,
+    
+    timerCounter : 0 ,
     
     maxTime : 60 ,
     
@@ -12,18 +16,19 @@ const Timer = {
     } ,
     
     scheduledWork : function () {
-        if (! this.timeOverflow()) {
-            this.timeCounter++;
-            
+        if (! this.timeOverflow ()) {
+            this.timerCounter++;
+            this.hTimerCounter.text (this.timerCounter);
+            this.hTimerBar.animate ({width : '+=10'} , this.secondKeeper);
         }
     } ,
     
     timeOverflow : function () {
-        return this.timeCounter <= this.maxTime ? false : true;
+        return this.timerCounter <= this.maxTime ? false : true;
     } ,
     
     run : function () {
-        
+        this.startTime ();
     } ,
     
     stop : function () {
@@ -34,3 +39,5 @@ const Timer = {
         
     } 
 };
+
+Timer.run ();
