@@ -11,7 +11,7 @@ $(document).ready (function () {
         
         typingStartTime : 0 ,
         
-        typingTimeout : 10000 ,
+        typingTimeout : 1000 , /* todo: change the value */
         
         /**
          * Object initializer function
@@ -358,7 +358,9 @@ $(document).ready (function () {
                 
                 this.redSignAnimation ();
                 
-                $('#game-over').fadeIn ();
+//                $('#game-over').fadeIn ();
+//                End.showGameOver ();
+                End.showYouWin ();
             }
         } ,
         
