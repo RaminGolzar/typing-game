@@ -1,42 +1,71 @@
 const Timer = {
+    /**
+     * Hold the html element
+     * 
+     * @type type
+     */
     hTimerCounter : $('#timer-counter') ,
     
+    /**
+     * 
+     * @type type
+     */
     hTimerBar : $('#timer-bar') ,
     
     timerCounter : 0 ,
     
     maxTime : 60 ,
     
-    secondKeeper : 1000 ,
+    secondKeeper : 200 ,
     
-    startTime : function () {
-        let timer = setInterval (function () {
+    timerInself : null ,
+    
+    run : function () {
+        this.timerInself = setInterval (function () {
             Timer.scheduledWork ();
         } , this.secondKeeper);
     } ,
     
     scheduledWork : function () {
-        if (! this.timeOverflow ()) {
+        let incrementWidth = '+=1.66%';
+        
+        if (this.timerOverflow ()) {
+            this.timeOutAction ();
+        } else {
             this.timerCounter++;
             this.hTimerCounter.text (this.timerCounter);
-            this.hTimerBar.animate ({width : '+=10'} , this.secondKeeper);
+            this.hTimerBar.animate ({width : incrementWidth} , this.secondKeeper);
         }
     } ,
     
-    timeOverflow : function () {
-        return this.timerCounter <= this.maxTime ? false : true;
-    } ,
-    
-    run : function () {
-        this.startTime ();
+    timerOverflow : function () {
+        return this.timerCounter < this.maxTime ? false : true;
     } ,
     
     stop : function () {
-        
+        clearInterval (this.timerInself);
     } ,
     
     reset : function () {
+        this.stop ();
         
+        this.timerCounter = 0;
+        this.hTimerCounter.text ('0');
+        this.hTimerBar.css ({width : '0px'});
+    } ,
+    
+    timeOutAction : function () {
+        this.stop();
+        
+        if (TypingControll.isGameOver ()) {
+            return;
+        }
+        
+        if (status.isLastLevel ()) {
+            End.showYouWin ();
+        } else {
+            End.showNextLevel ();
+        }
     } 
 };
 
