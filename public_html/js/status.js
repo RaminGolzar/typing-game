@@ -1,6 +1,7 @@
 const status = {
     gameFlow : 'stop',
     level : 1 ,
+    maxLevel : 5 ,
     word : 0 ,
     char : 0 ,
     mistake : 0 ,
@@ -43,6 +44,15 @@ const status = {
     } ,
     
     /**
+     * Is it the last level? "true" means the last level
+     * 
+     * @returns {Boolean}
+     */
+    isLastLevel : function () {
+        return this.level < this.maxLevel ? false : true;
+    } ,
+    
+    /**
      * Increment time property
      * 
      * @type type
@@ -78,3 +88,7 @@ const status = {
         this.mistake++;
     }
 };
+
+/* todo: amaliate ruye char , word , mistake , ... as file
+ * TypingControll.js be inja montaghel shavad.
+ */
