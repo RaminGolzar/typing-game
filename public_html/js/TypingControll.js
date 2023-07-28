@@ -348,7 +348,7 @@ $(document).ready (function () {
         recordRedSign : function () {
             this.redSignCounter++;
             
-            if (! this.overflowRedSign ()) {
+            if (! this.isGameOver ()) {
                 this.redSignAnimation ();
             
                 this.newTextBlock ();
@@ -358,9 +358,7 @@ $(document).ready (function () {
                 
                 this.redSignAnimation ();
                 
-//                $('#game-over').fadeIn ();
-//                End.showGameOver ();
-                End.showYouWin ();
+                End.showGameOver ();
             }
         } ,
         
@@ -369,7 +367,7 @@ $(document).ready (function () {
          * 
          * @returns {Boolean}
          */
-        overflowRedSign : function () {
+        isGameOver : function () {
             return this.redSignCounter < this.maxRedSign ? false : true;
         } ,
         
