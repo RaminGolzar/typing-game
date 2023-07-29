@@ -6,6 +6,7 @@ const status = {
     char : 0 ,
     mistake : 0 ,
     time : 0 ,
+    endTime : false ,
     
     /**
      * Reset the all game status

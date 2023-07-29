@@ -22,8 +22,6 @@ const Timer = {
     
     timerInself : null ,
     
-    endTime : false ,
-    
     run : function () {
         this.timerInself = setInterval (function () {
             Timer.scheduledWork ();
@@ -65,7 +63,7 @@ const Timer = {
             return;
         }
         
-        this.endTime = true;
+        status.endTime = true;
         
         this.displayFinalMessage ();
     } ,
