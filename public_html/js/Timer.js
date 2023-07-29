@@ -34,7 +34,7 @@ const Timer = {
      * 
      * @type Number
      */
-    aSecond : 100 ,
+    aSecond : 1000 ,
     
     /**
      * Hold the output of the scheluded work
