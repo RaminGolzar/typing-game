@@ -143,5 +143,3 @@ const Timer = {
         this.elemTimerBar.animate ({width : incrementWidth} , this.aSecond);
     } 
 };
-
-Timer.run ();
