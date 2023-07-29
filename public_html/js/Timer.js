@@ -6,58 +6,107 @@ const Timer = {
      * 
      * @type type
      */
-    hTimerCounter : $('#timer-counter') ,
+    elemTimerCounter : $('#timer-counter') ,
     
     /**
+     * Hold the html element
      * 
      * @type type
      */
-    hTimerBar : $('#timer-bar') ,
+    elemTimerBar : $('#timer-bar') ,
     
-    timerCounter : 0 ,
+    /**
+     * This is the second counter
+     * 
+     * @type Number
+     */
+    secondCounter : 0 ,
     
+    /**
+     * This is the maximum time
+     * 
+     * @type Number
+     */
     maxTime : 60 ,
     
-    secondKeeper : 100 ,
+    /**
+     * This is a second, in thousandths of a second
+     * 
+     * @type Number
+     */
+    aSecond : 100 ,
     
-    timerInself : null ,
+    /**
+     * Hold the output of the scheluded work
+     * 
+     * @type type
+     */
+    outputScheduled : null ,
     
+    /**
+     * This is executeable method
+     * 
+     * @returns {undefined}
+     */
     run : function () {
-        this.timerInself = setInterval (function () {
+        status.endTime = false;
+        
+        this.outputScheduled = setInterval (function () {
             Timer.scheduledWork ();
-        } , this.secondKeeper);
+        } , this.aSecond);
     } ,
     
+    /**
+     * This is scheduled works
+     * 
+     * @returns {undefined}
+     */
     scheduledWork : function () {
-        let incrementWidth = '+=1.66%';
-        
-        if (this.timerOverflow ()) {
+        if (this.isTimeOut ()) {
             this.timeOutAction ();
         } else {
-            this.timerCounter++;
-            this.hTimerCounter.text (this.timerCounter);
-            this.hTimerBar.animate ({width : incrementWidth} , this.secondKeeper);
+            this.noTimeOutAction ();
         }
     } ,
     
-    timerOverflow : function () {
-        return this.timerCounter < this.maxTime ? false : true;
+    /**
+     * Return "true", if time has expired
+     * 
+     * @returns {Boolean}
+     */
+    isTimeOut : function () {
+        return this.secondCounter < this.maxTime ? false : true;
     } ,
     
-    stop : function () {
-        clearInterval (this.timerInself);
+    /**
+     * Unset the timer
+     * 
+     * @returns {undefined}
+     */
+    unset : function () {
+        clearInterval (this.outputScheduled);
     } ,
     
+    /**
+     * Reset the timer
+     * 
+     * @returns {undefined}
+     */
     reset : function () {
-        this.stop ();
+        this.unset ();
         
-        this.timerCounter = 0;
-        this.hTimerCounter.text ('0');
-        this.hTimerBar.css ({width : '0px'});
+        this.secondCounter = 0;
+        this.elemTimerCounter.text ('0');
+        this.elemTimerBar.css ({width : '0px'});
     } ,
     
+    /**
+     * Things that should be done when the time is up
+     * 
+     * @returns {undefined}
+     */
     timeOutAction : function () {
-        this.stop();
+        this.unset ();
         
         if (TypingControll.isGameOver ()) {
             return;
@@ -68,12 +117,30 @@ const Timer = {
         this.displayFinalMessage ();
     } ,
     
+    /**
+     * Display the final message
+     * 
+     * @returns {undefined}
+     */
     displayFinalMessage : function () {
         if (status.isLastLevel ()) {
             End.showYouWin ();
         } else {
             End.showNextLevel ();
         }
+    } ,
+    
+    /**
+     * If the time has not expired, this action must be taken
+     * 
+     * @returns {undefined}
+     */
+    noTimeOutAction : function () {
+        let incrementWidth = '+=1.66%';
+        
+        this.secondCounter++;
+        this.elemTimerCounter.text (this.secondCounter);
+        this.elemTimerBar.animate ({width : incrementWidth} , this.aSecond);
     } 
 };
 
