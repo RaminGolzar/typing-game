@@ -41,7 +41,9 @@ const status = {
      * @type type
      */
     levelPlus : function () {
-        this.level++;
+        if (! this.isLastLevel ()) {
+            this.level++;
+        }
     } ,
     
     /**
