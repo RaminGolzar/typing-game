@@ -2,9 +2,6 @@ const status = {
     gameFlow : 'stop',
     level : 1 ,
     maxLevel : 5 ,
-    word : 0 ,
-    char : 0 ,
-    mistake : 0 ,
     time : 0 ,
     endTime : false ,
     
@@ -16,9 +13,6 @@ const status = {
     reset : function () {
         this.gameFlow = 'stop';
         this.level = 1;
-        this.word = 0;
-        this.char = 0;
-        this.mistake = 0;
         this.time = 0;
     } ,
     
@@ -62,34 +56,7 @@ const status = {
      */
     timePlus : function () {
         this.time++;
-    } ,
-    
-    /**
-     * Increment word property
-     * 
-     * @type type
-     */
-    wordPlus : function () {
-        this.word++;
-    } ,
-    
-    /**
-     * Increment char property
-     * 
-     * @type type
-     */
-    charPlus : function () {
-        this.char++;
-    } ,
-    
-    /**
-     * Increment mistake property
-     * 
-     * @type type
-     */
-    mistakePlus : function () {
-        this.mistake++;
-    }
+    } 
 };
 
 /* todo: amaliate ruye char , word , mistake , ... as file
