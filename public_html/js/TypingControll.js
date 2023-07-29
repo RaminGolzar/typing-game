@@ -1,6 +1,7 @@
 /* global embed, lorem */
 
-$(document).ready (function () {
+/* todo: delete below line */
+//$(document).ready (function () {
     const TypingControll = {
         textBlock : $('#text-block') ,
         
@@ -491,5 +492,7 @@ $(document).ready (function () {
     $('body').keypress(function (keyEvent) {
         TypingControll.run (keyEvent);
     });
-});
+    
+    /* todo: delete below line */
+//});
 

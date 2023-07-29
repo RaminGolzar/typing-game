@@ -22,6 +22,8 @@ const Timer = {
     
     timerInself : null ,
     
+    endTime : false ,
+    
     run : function () {
         this.timerInself = setInterval (function () {
             Timer.scheduledWork ();
@@ -60,12 +62,15 @@ const Timer = {
         this.stop();
         
         if (TypingControll.isGameOver ()) {
-            alert ('{ Ok }');
-        } else {
-            alert ('{ Error }');
+            return;
         }
-
-
+        
+        this.endTime = true;
+        
+        this.displayFinalMessage ();
+    } ,
+    
+    displayFinalMessage : function () {
         if (status.isLastLevel ()) {
             End.showYouWin ();
         } else {
