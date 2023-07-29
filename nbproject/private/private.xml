@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="12">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="13">
+        <file>
+            <url>public_html/js/Timer.js</url>
+            <bookmark id="13">
+                <name/>
+                <line>58</line>
+                <key/>
+            </bookmark>
+        </file>
         <file>
             <url>public_html/js/TypingControll.js</url>
             <bookmark id="12">
@@ -10,7 +18,7 @@
             </bookmark>
             <bookmark id="11">
                 <name/>
-                <line>360</line>
+                <line>359</line>
                 <key/>
             </bookmark>
         </file>
@@ -19,6 +27,8 @@
         <group>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/Timer.js</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/TypingControll.js</file>
+            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/status.js</file>
+            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/End.js</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/css/side-style.css</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/index.html</file>
         </group>

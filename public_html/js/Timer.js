@@ -1,3 +1,5 @@
+/* global TypingControll */
+
 const Timer = {
     /**
      * Hold the html element
@@ -16,7 +18,7 @@ const Timer = {
     
     maxTime : 60 ,
     
-    secondKeeper : 200 ,
+    secondKeeper : 100 ,
     
     timerInself : null ,
     
@@ -58,9 +60,12 @@ const Timer = {
         this.stop();
         
         if (TypingControll.isGameOver ()) {
-            return;
+            alert ('{ Ok }');
+        } else {
+            alert ('{ Error }');
         }
-        
+
+
         if (status.isLastLevel ()) {
             End.showYouWin ();
         } else {
