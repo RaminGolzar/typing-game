@@ -50,12 +50,12 @@
          * @returns {undefined}
          */
         newTextBlock : function () {
-            Record.addWord 
-            (
-                true , 
-                this.checkTypingTimeout() , 
-                this.textBlockState 
-            );
+//            Record.addWord 
+//            (
+//                true , 
+//                this.checkTypingTimeout() , 
+//                this.textBlockState 
+//            );
             
             this.STBS ('typing');
             
@@ -178,6 +178,8 @@
             this.setKeyCode (keyEvent);
             
             this.nextChar ();
+            
+            this.currentCharAction ();
             
             this.recording ();
             
@@ -394,12 +396,14 @@
          */
         
         recording : function () {
-            if (this.overflowCharIndex (true)) {
-                alert ('H');
-                return;
+            if (this.overflowCharIndex (false)) {
+                Record.addWord 
+                (
+                    true , 
+                    this.checkTypingTimeout() , 
+                    this.textBlockState 
+                );
             }
-            
-            this.currentCharAction ();
             
             if (this.compareCodes ()) {
                 Record.addChar ();
