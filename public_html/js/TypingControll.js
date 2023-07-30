@@ -321,26 +321,6 @@
             element.addClass (className);
         } ,
         
-        /*------------------------------------------------------------------------
-         * Red Sign
-         * -------------------------------------------------------------------------
-         */
-        
-        redSignCounter : 0 ,
-        
-        maxRedSign : 3 ,
-        
-        /**
-         * Reset the red sign style
-         * 
-         * @returns {undefined}
-         */
-        resetRedSign : function () {
-            $('red-sign-1 , red-sign-2 , red-sign-1').removeClass ('w3-text-red');
-            
-            $('red-sign-1 , red-sign-2 , red-sign-1').addClass ('w3-text-white');
-        } ,
-        
         /**
          * Recording a red sign
          * 
@@ -361,26 +341,6 @@
                 
                 End.showGameOver ();
             }
-        } ,
-        
-        /**
-         * Return "true", if the red sign has overflowed
-         * 
-         * @returns {Boolean}
-         */
-        isGameOver : function () {
-            return this.redSignCounter < this.maxRedSign ? false : true;
-        } ,
-        
-        /**
-         * Set a style for a red sign
-         * 
-         * @returns {undefined}
-         */
-        redSignAnimation : function () {
-            $('#red-sign-' + this.redSignCounter)
-                .removeClass ('w3-text-white')
-                .addClass ('w3-text-red');
         } ,
         
         /**
