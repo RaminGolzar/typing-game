@@ -212,7 +212,7 @@
          * @returns {undefined}
          */
         compareOrNew : function () {
-            if (! this.overflowCharIndex (false)) {
+            if (! this.isLastChar (false)) {
                 this.currentCharAction ();
                 this.comparisonChar ();
             } else {
@@ -228,7 +228,7 @@
          * @param {boolean} lessThanOrEqual
          * @returns {Boolean}
          */
-        overflowCharIndex : function (lessThanOrEqual) {
+        isLastChar : function (lessThanOrEqual) {
             if (lessThanOrEqual) {
                 return this.currentCharIndex <= (this.textBlockLength - 1) ? false : true;
             } else {
@@ -390,13 +390,8 @@
                 .addClass ('w3-text-red');
         } ,
         
-        /*----------------------------------------------------------------------
-         * Record Statistics
-         * --------------------------------------------------------------------
-         */
-        
         recording : function () {
-            if (this.overflowCharIndex (false)) {
+            if (this.isLastChar (false)) {
                 Record.addWord 
                 (
                     true , 
