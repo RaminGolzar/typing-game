@@ -390,7 +390,23 @@
                 .addClass ('w3-text-red');
         } ,
         
+        /**
+         * Record number of the char, word & mistake
+         * 
+         * @returns {undefined}
+         */
         recording : function () {
+            this.recordLastWord ();
+            
+            this.normalRecord ();
+        } ,
+        
+        /**
+         * Record number of the word, if it was last word
+         * 
+         * @returns {undefined}
+         */
+        recordLastWord : function () {
             if (this.isLastChar (false)) {
                 Record.addWord 
                 (
@@ -399,7 +415,14 @@
                     this.textBlockState 
                 );
             }
-            
+        } ,
+        
+        /**
+         * This is a normal recording
+         * 
+         * @returns {undefined}
+         */
+        normalRecord : function () {
             if (this.compareCodes ()) {
                 Record.addChar ();
                 
@@ -407,7 +430,7 @@
             } else {
                 Record.addMistake ();
             }
-        }
+        } 
     };
     
 
