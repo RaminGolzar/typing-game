@@ -12,7 +12,7 @@
         
         typingStartTime : 0 ,
         
-        typingTimeout : 1000 , /* todo: change the value */
+        typingTimeout : 10000 , /* todo: change the value */
         
         /**
          * Object initializer function
@@ -50,7 +50,12 @@
          * @returns {undefined}
          */
         newTextBlock : function () {
-            this.recordWord (true);
+            Record.addWord 
+            (
+                true , 
+                this.checkTypingTimeout() , 
+                this.textBlockState 
+            );
             
             this.STBS ('typing');
             
@@ -388,103 +393,22 @@
          * --------------------------------------------------------------------
          */
         
-        charCounter : 0 ,
-        
-        wordCounter : 0 ,
-        
-        mistakeCounter : 0 ,
-        
         recording : function () {
             if (this.overflowCharIndex (true)) {
+                alert ('H');
                 return;
             }
             
             this.currentCharAction ();
             
             if (this.compareCodes ()) {
-                this.recordChar ();
+                Record.addChar ();
                 
-                this.recordWord ();
+                Record.addWord (false , null , null , this.keyCode);
             } else {
-                this.recordMistake ();
+                Record.addMistake ();
             }
-        } ,
-        
-        /**
-         * Add one to the number of the mistake counter
-         * 
-         * @returns {undefined}
-         */
-        recordMistake : function () {
-            this.mistakeCounter++;
-            $('#mistake-counter').text (this.mistakeCounter);
-        } ,
-        
-        /**
-         * Add one to the number of word counter
-         * 
-         * @param {boolean} directRecord
-         * @returns {undefined}
-         */
-        recordWord : function (directRecord = false) {
-            if (directRecord) {
-                if (!this.checkTypingTimeout () && this.textBlockState !== 'start') {
-                    this.incrementWordCounter ();
-                }
-            } else {
-                if (this.spacebarValidation ()) {
-                    this.incrementWordCounter ();
-                }
-            }
-        } ,
-        
-        /**
-         * Increment the word count counter
-         * 
-         * @returns {undefined}
-         */
-        incrementWordCounter : function () {
-            this.wordCounter++;
-            $('#word-counter').text (this.wordCounter);
-        } ,
-        
-        /**
-         * Spacebar validation
-         * 
-         * Returns "true" if the key is valid
-         * 
-         * @returns {Boolean}
-         */
-        spacebarValidation : function () {
-            let spaceKeyCode = 32;
-            
-            return this.keyCode == spaceKeyCode ? true : false;
-        } ,
-        
-        /**
-         * Add one to the number of char counter
-         * 
-         * @returns {undefined}
-         */
-        recordChar : function () {
-            this.charCounter++;
-            $('#char-counter').text (this.charCounter);
-        } ,
-        
-        /**
-         * Reset the statistics counters
-         * 
-         * @returns {undefined}
-         */
-        resetStatistics : function () {
-            this.wordCounter = 0;
-            this.charCounter = 0;
-            this.mistakeCounter = 0;
-            
-            $('#word-counter').text (this.wordCounter);
-            $('#char-counter').text (this.charCounter);
-            $('#mistake-counter').text (this.mistakeCounter);
-        } 
+        }
     };
     
 
