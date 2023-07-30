@@ -12,7 +12,7 @@
         
         typingStartTime : 0 ,
         
-        typingTimeout : 10000 , /* todo: change the value */
+        typingTimeout : 10000 ,
         
         /**
          * Object initializer function
@@ -50,13 +50,6 @@
          * @returns {undefined}
          */
         newTextBlock : function () {
-//            Record.addWord 
-//            (
-//                true , 
-//                this.checkTypingTimeout() , 
-//                this.textBlockState 
-//            );
-            
             this.STBS ('typing');
             
             this.setTypingStartTime ();
