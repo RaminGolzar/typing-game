@@ -1,20 +1,20 @@
 const Record = {
     /**
-     * keep the number of characters
+     * keeps the number of characters
      * 
      * @type Number
      */
     charCounter : 0 ,
      
     /**
-     * Keep the number of words
+     * Keeps the number of words
      * 
      * @type Number
      */
     wordCounter : 0 ,
     
     /**
-     * Keep the number of spelling mistake
+     * Keeps the number of spelling mistake
      * 
      * @type Number
      */
