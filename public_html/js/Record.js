@@ -1,8 +1,23 @@
 const Record = {
+    /**
+     * keep the number of characters
+     * 
+     * @type Number
+     */
     charCounter : 0 ,
-        
+     
+    /**
+     * Keep the number of words
+     * 
+     * @type Number
+     */
     wordCounter : 0 ,
-        
+    
+    /**
+     * Keep the number of spelling mistake
+     * 
+     * @type Number
+     */
     mistakeCounter : 0 ,
     
     /**
@@ -33,11 +48,11 @@ const Record = {
     ) {
         if (directRecord) {
             if (!checkTypingTimeout && textBlockState !== 'start') {
-                this.incrementWordCounter ();
+                this.wordIncrease ();
             }
         } else {
             if (this.spacebarValidation (keyCode)) {
-                this.incrementWordCounter ();
+                this.wordIncrease ();
             }
         }
     } ,
@@ -47,7 +62,7 @@ const Record = {
      * 
      * @returns {undefined}
      */
-    incrementWordCounter : function () {
+    wordIncrease : function () {
         this.wordCounter++;
         $('#word-counter').text (this.wordCounter);
     } ,
@@ -55,7 +70,7 @@ const Record = {
     /**
      * Spacebar validation
      * 
-     * Returns "true" if the key is valid
+     * Returns "true" if the space key is pressed
      * 
      * @returns {Boolean}
      */
