@@ -7,6 +7,15 @@ const RedSign = {
     redSignCounter : 0 ,
 
     /**
+     * Adds to the number of red sign
+     * 
+     * @returns {undefined}
+     */
+    redSignIncrease : function () {
+        this.redSignCounter++;
+    } ,
+
+    /**
      * Return "true", if the red sign has overflowed
      * 
      * @returns {Boolean}

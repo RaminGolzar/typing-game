@@ -12,7 +12,7 @@
         
         typingStartTime : 0 ,
         
-        typingTimeout : 10000 ,
+        typingTimeout : 1000 ,
         
         /**
          * Object initializer function
@@ -327,19 +327,19 @@
          * @returns {undefined}
          */
         recordRedSign : function () {
-            this.redSignCounter++;
+            RedSign.redSignIncrease ();
             
-            if (! this.isGameOver ()) {
-                this.redSignAnimation ();
-            
-                this.newTextBlock ();
-            } else { /* game over */
+            if (RedSign.isGameOver ()) {
                 /* todo: this code is temporary */
                 this.textBlockState = 'gameOver';
                 
-                this.redSignAnimation ();
+                RedSign.redSignAnimation ();
                 
                 End.showGameOver ();
+            } else {
+                RedSign.redSignAnimation ();
+            
+                this.newTextBlock ();
             }
         } ,
         
