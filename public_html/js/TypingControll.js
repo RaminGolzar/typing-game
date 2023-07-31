@@ -5,14 +5,9 @@
     const TypingControll = {
         textBlock : $('#text-block') ,
         
-        /**
-         * Allowed: start , typing , typed , endTime
-         */
-        textBlockState : 'start' , 
-        
         typingStartTime : 0 ,
         
-        typingTimeout : 1000 ,
+        typingTimeout : 10000 ,
         
         /**
          * Object initializer function
@@ -21,7 +16,6 @@
          * @returns {undefined}
          */
         run : function (keyEvent) {
-            alert (Mode.getMode());
             if (Mode.isStart() || Mode.isEndTime()) {
                 this.newTextBlock ();
             } else if (Mode.isTyping() && this.checkTypingTimeout ()) {
@@ -95,7 +89,8 @@
             this.textBlock.stop()
                 .css ({top : '0px'})
                 .animate ({top : '+=210'}, this.typingTimeout ,function () {
-                    Mode.setEndTime();
+                    /* todo: delete below line */
+//                    Mode.setEndTime();
                     this.textBlock.stop ();
                 });
         } ,
@@ -107,18 +102,6 @@
          */
         newLoremForTextBlock : function () {
             this.textBlock.html (this.genLorem ());
-        } ,
-        
-        /**
-         * STBS stands for "Set Text Block State"
-         * 
-         * @param {string} state
-         * @returns {TypingControllL#1.TypingControll.STBS}
-         */
-        STBS : function (state) {
-            if (state === 'start' || state === 'typing' || state === 'typed' || state === 'endTime') {
-                this.textBlockState = state;
-            }
         } ,
         
         /**
