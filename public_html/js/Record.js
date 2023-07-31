@@ -35,7 +35,6 @@ const Record = {
      * 
      * @param {boolean} directRecord
      * @param {boolean} checkTypingTimeout
-     * @param {string} textBlockState
      * @param {string} keyCode
      * @returns {undefined}
      */
@@ -43,11 +42,10 @@ const Record = {
     (
         directRecord = false , 
         checkTypingTimeout = null , 
-        textBlockState = null , 
         keyCode = null
     ) {
         if (directRecord) {
-            if (!checkTypingTimeout && textBlockState !== 'start') {
+            if (!checkTypingTimeout && !Mode.isStart()) {
                 this.wordIncrease ();
             }
         } else {

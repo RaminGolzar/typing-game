@@ -360,12 +360,7 @@
          */
         recordLastWord : function () {
             if (this.isLastChar (false)) {
-                Record.addWord 
-                (
-                    true , 
-                    this.checkTypingTimeout() , 
-                    Mode.mode 
-                );
+                Record.addWord (true , this.checkTypingTimeout ());
             }
         } ,
         
@@ -378,7 +373,7 @@
             if (this.compareCodes ()) {
                 Record.addChar ();
                 
-                Record.addWord (false , null , null , this.keyCode);
+                Record.addWord (false , null , this.keyCode);
             } else {
                 Record.addMistake ();
             }
