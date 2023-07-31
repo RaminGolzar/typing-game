@@ -37,7 +37,7 @@
          * @returns {Array|String}
          */
         genLorem : function () {
-            let loremIpsum = lorem.genLorem(status.level , 3);
+            let loremIpsum = lorem.genLorem(Level.levelCounter , 3);
             
             this.textBlockLength = loremIpsum.length;
             
