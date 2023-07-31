@@ -123,7 +123,7 @@ const Timer = {
      * @returns {undefined}
      */
     displayFinalMessage : function () {
-        if (status.isLastLevel ()) {
+        if (Level.isLastLevel ()) {
             End.showYouWin ();
         } else {
             End.showNextLevel ();
