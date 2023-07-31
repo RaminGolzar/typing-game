@@ -1,6 +1,27 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
- */
-
-
+const Level = {
+    maxLevel : 5 ,
+    
+    levelCounter : 1 ,
+    
+    elemLevelCounter : $('#level-counter') ,
+    
+    goNext : function () {
+        if (! this.isLastLevel()) {
+            this.levelIncrease();
+        }
+    } ,
+    
+    levelIncrease : function () {
+        this.levelCounter++;
+        this.elemLevelCounter.text (this.levelCounter);
+    } ,
+    
+    isLastLevel : function () {
+        return this.levelCounter < this.maxLevel ? false : true;
+    } ,
+    
+    reset : function () {
+        this.levelCounter = 1;
+        this.elemLevelCounter.text ('1');
+    } ,
+};
