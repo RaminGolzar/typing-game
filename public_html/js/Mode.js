@@ -5,39 +5,39 @@ const Mode = {
         this.mode = 'start';
     } ,
     
-    isStartMode : function () {
+    isStart : function () {
         return this.mode === 'start' ? true : false;
     } ,
     
-    setTypingMode : function () {
+    setTyping : function () {
         this.mode = 'typing';
     } ,
     
-    isTypingMode : function () {
+    isTyping : function () {
         return this.mode === 'typing' ? true : false;
     } ,
     
-    setEndTimeMode : function () {
+    setEndTime : function () {
         this.mode = 'endTime';
     } ,
     
-    isEndTimeMode : function () {
+    isEndTime : function () {
         return this.mode === 'endTime' ? true : false;
     } ,
     
-    setTypedMode : function () {
+    setTyped : function () {
         this.mode = 'typed';
     } ,
     
-    isTypedMode : function () {
+    isTyped : function () {
         return this.mode === 'typed' ? true : false;
     } ,
     
-    setGameOverMode : function () {
+    setGameOver : function () {
         this.mode = 'gameOver';
     } ,
     
-    isGameOverMode : function () {
+    isGameOver : function () {
         return this.mode === 'gameOver' ? true : false;
     } ,
     
