@@ -7,6 +7,17 @@ const RedSign = {
     redSignCounter : 0 ,
 
     /**
+     * Register a red sign
+     * 
+     * @returns {undefined}
+     */
+    register : function () {
+        this.redSignIncrease();
+        
+        this.toRed()
+    } ,
+
+    /**
      * Adds to the number of red sign
      * 
      * @returns {undefined}
@@ -29,7 +40,7 @@ const RedSign = {
      * 
      * @returns {undefined}
      */
-    redSignAnimation : function () {
+    toRed : function () {
         $('#red-sign-' + this.redSignCounter)
             .removeClass ('w3-text-white')
             .addClass ('w3-text-red');
@@ -50,8 +61,8 @@ const RedSign = {
     reset : function () {
         this.redSignCounter = 0;
         
-        $('red-sign-1 , red-sign-2 , red-sign-3').removeClass ('w3-text-red');
-
-        $('red-sign-1 , red-sign-2 , red-sign-3').addClass ('w3-text-white');
+        $('red-sign-1 , red-sign-2 , red-sign-3')
+            .removeClass ('w3-text-red')
+            .addClass ('w3-text-white');
     } 
 };

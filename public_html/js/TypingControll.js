@@ -25,7 +25,7 @@
                 this.newTextBlock ();
             } else if (this.textBlockState === 'typing' && this.checkTypingTimeout ()) {
                 this.STBS ('endTime');
-                this.recordRedSign ();
+                this.registerRedSign();
             } else if (this.textBlockState === 'typing' && !this.checkTypingTimeout ()) {
                 this.typing (keyEvent);
             }
@@ -321,27 +321,42 @@
             element.addClass (className);
         } ,
         
+        /* --------------------------------------------------
+         * Red Sign
+         * --------------------------------------------------
+         */
+        
         /**
          * Recording a red sign
          * 
          * @returns {undefined}
          */
-        recordRedSign : function () {
-            RedSign.redSignIncrease ();
+        registerRedSign : function () {
+            RedSign.register ();
             
             if (RedSign.isGameOver ()) {
-                /* todo: this code is temporary */
-                this.textBlockState = 'gameOver';
-                
-                RedSign.redSignAnimation ();
-                
-                End.showGameOver ();
+                this.actionsGameOver ();
             } else {
-                RedSign.redSignAnimation ();
-            
                 this.newTextBlock ();
             }
         } ,
+        
+        /**
+         * The act of losing is done
+         * 
+         * @returns {undefined}
+         */
+        actionsGameOver : function () {
+            /* todo: this code is temporary */
+            this.textBlockState = 'gameOver';
+            
+            End.showGameOver ();
+        } ,
+        
+        /* --------------------------------------------------
+         * Recording
+         * --------------------------------------------------
+         */
         
         /**
          * Record number of the char, word & mistake
