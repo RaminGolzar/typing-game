@@ -21,12 +21,13 @@
          * @returns {undefined}
          */
         run : function (keyEvent) {
-            if (this.textBlockState === 'start' || this.textBlockState === 'endTime') {
+            alert (Mode.getMode());
+            if (Mode.isStart() || Mode.isEndTime()) {
                 this.newTextBlock ();
-            } else if (this.textBlockState === 'typing' && this.checkTypingTimeout ()) {
-                this.STBS ('endTime');
+            } else if (Mode.isTyping() && this.checkTypingTimeout ()) {
+                Mode.setEndTime();
                 this.registerRedSign();
-            } else if (this.textBlockState === 'typing' && !this.checkTypingTimeout ()) {
+            } else if (Mode.isTyping() && !this.checkTypingTimeout ()) {
                 this.typing (keyEvent);
             }
         } ,
@@ -50,7 +51,7 @@
          * @returns {undefined}
          */
         newTextBlock : function () {
-            this.STBS ('typing');
+            Mode.setTyping();
             
             this.setTypingStartTime ();
             
@@ -94,7 +95,7 @@
             this.textBlock.stop()
                 .css ({top : '0px'})
                 .animate ({top : '+=210'}, this.typingTimeout ,function () {
-                    this.textBlockState = 'endTime';
+                    Mode.setEndTime();
                     this.textBlock.stop ();
                 });
         } ,
@@ -209,7 +210,7 @@
                 this.currentCharAction ();
                 this.comparisonChar ();
             } else {
-                this.textBlockState = 'typed';
+                Mode.setTyped();
                 this.newTextBlock();
             }
         } ,
@@ -348,7 +349,7 @@
          */
         actionsGameOver : function () {
             /* todo: this code is temporary */
-            this.textBlockState = 'gameOver';
+            Mode.setGameOver();
             
             End.showGameOver ();
         } ,
@@ -380,7 +381,7 @@
                 (
                     true , 
                     this.checkTypingTimeout() , 
-                    this.textBlockState 
+                    Mode.mode 
                 );
             }
         } ,

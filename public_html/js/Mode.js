@@ -39,9 +39,5 @@ const Mode = {
     
     isGameOver : function () {
         return this.mode === 'gameOver' ? true : false;
-    } ,
-    
-    getMode : function () {
-        return this.mode;
     } 
 };
