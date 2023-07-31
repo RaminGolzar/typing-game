@@ -1,5 +1,12 @@
 const RedSign = {
     /**
+     * Keeps maximim red sign
+     * 
+     * @type Number
+     */
+    maxRedSign : 3 ,
+    
+    /**
      * Keep number of the red sign
      * 
      * @type Number
@@ -45,13 +52,6 @@ const RedSign = {
             .removeClass ('w3-text-white')
             .addClass ('w3-text-red');
     } ,
-
-    /**
-     * Keeps maximim red sign
-     * 
-     * @type Number
-     */
-    maxRedSign : 3 ,
 
     /**
      * Reset the red signs
