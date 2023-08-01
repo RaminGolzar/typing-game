@@ -87,9 +87,7 @@
             this.textBlock.stop()
                 .css ({top : '0px'})
                 .animate ({top : '+=210'}, this.typingTimeout ,function () {
-                    /* todo: delete below line */
-//                    Mode.setEndTime();
-                    this.textBlock.stop ();
+                    this.stopMoving ();
                 });
         } ,
         
@@ -375,5 +373,14 @@
             } else {
                 Record.addMistake ();
             }
+        } ,
+        
+        /**
+         * Stop textBlock animation
+         * 
+         * @returns {undefined}
+         */
+        stopMoving : function () {
+            this.textBlock.stop();
         } 
     };
