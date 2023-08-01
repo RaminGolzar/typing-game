@@ -43,12 +43,12 @@ h1 span:first-child {
 #timer-bar {
 	height: 40px;
 	width: 0;
-	background: linear-gradient(to bottom , #24d 10% , #aaf 25%  , #0af 35% , #ccf 60% , #47f 80%);
+	background: linear-gradient(to bottom , #fa0 45% , #c80 55%);
 }
 
 .ss-button {
-	border: 2px solid #3c3;
-	background: linear-gradient(to bottom , #6a6 45% , #373 55%);
+	border: 2px solid #faa;
+	background: linear-gradient(to bottom , #f88 45% , #a44 55%);
 }
 
 .ss-current-char {
