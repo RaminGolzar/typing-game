@@ -1,7 +1,7 @@
 const Mode = {
-    mode : 'start' ,
+    mode : 'stop' ,
     
-    setStartMode : function () {
+    setStart : function () {
         this.mode = 'start';
     } ,
     
@@ -39,5 +39,13 @@ const Mode = {
     
     isGameOver : function () {
         return this.mode === 'gameOver' ? true : false;
+    } ,
+    
+    setStop : function () {
+        this.mode = 'stop';
+    } ,
+    
+    isStop : function () {
+        return this.mode === 'stop' ? true : false;
     } 
 };
