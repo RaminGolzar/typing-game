@@ -34,7 +34,7 @@ const Timer = {
      * 
      * @type Number
      */
-    aSecond : 100 , /* todo: replace 100 with the 1000 */
+    aSecond : 400 , /* todo: replace 100 with the 1000 */
     
     /**
      * Hold the output of the scheluded work
