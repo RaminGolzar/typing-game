@@ -327,10 +327,11 @@
          * @returns {undefined}
          */
         actionsGameOver : function () {
-            /* todo: this code is temporary */
             Mode.setGameOver();
             
             End.showGameOver ();
+            
+            Timer.stop();
         } ,
         
         /* --------------------------------------------------

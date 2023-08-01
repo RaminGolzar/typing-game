@@ -81,11 +81,11 @@ const Timer = {
     } ,
     
     /**
-     * Unset the timer
+     * Stop the timer
      * 
      * @returns {undefined}
      */
-    unset : function () {
+    stop : function () {
         clearInterval (this.outputScheduled);
     } ,
     
@@ -95,7 +95,7 @@ const Timer = {
      * @returns {undefined}
      */
     reset : function () {
-        this.unset ();
+        this.stop ();
         
         this.secondCounter = 0;
         this.elemTimerCounter.text ('0');
@@ -108,7 +108,7 @@ const Timer = {
      * @returns {undefined}
      */
     timeOutAction : function () {
-        this.unset ();
+        this.stop ();
         
         if (! RedSign.isGameOver ()) {
             this.endTime = true;
