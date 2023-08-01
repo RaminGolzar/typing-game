@@ -34,7 +34,7 @@ const Timer = {
      * 
      * @type Number
      */
-    aSecond : 1000 ,
+    aSecond : 100 , /* todo: replace 100 with the 1000 */
     
     /**
      * Hold the output of the scheluded work
@@ -43,7 +43,7 @@ const Timer = {
      */
     outputScheduled : null ,
     
-    endTime : false ,
+    endTime : false , /* todo: write a doc */
     
     /**
      * This is executeable method
@@ -110,13 +110,15 @@ const Timer = {
     timeOutAction : function () {
         this.unset ();
         
-        if (TypingControll.isGameOver ()) {
-            return;
+        if (! RedSign.isGameOver ()) {
+            this.endTime = true;
+        
+            this.displayFinalMessage ();
+        
+            Mode.setStop();
+        
+            TypingControll.stopMoving();
         }
-        
-        this.endTime = true;
-        
-        this.displayFinalMessage ();
     } ,
     
     /**
