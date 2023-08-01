@@ -1,7 +1,5 @@
 /* global embed, lorem */
 
-/* todo: delete below line */
-//$(document).ready (function () {
     const TypingControll = {
         textBlock : $('#text-block') ,
         
@@ -379,13 +377,3 @@
             }
         } 
     };
-    
-
-    /* todo: delete belove code */
-    $('body').keypress(function (keyEvent) {
-        TypingControll.run (keyEvent);
-    });
-    
-    /* todo: delete below line */
-//});
-
