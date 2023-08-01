@@ -5,7 +5,7 @@ $('body').keypress (function (keyEvent) {
 $('#start').click(function() {
     $(this).hide ();
     
-    ActionsEvents.baseStartActions ();
+    ActionsEvents.baseStart ();
 });
 
 $('#stop , #again').click(function() {
@@ -13,15 +13,15 @@ $('#stop , #again').click(function() {
     
     $('#start').show();
     
-    ActionsEvents.baseStopActions ($(this));
+    ActionsEvents.baseStop ($(this));
 });
 
 $('#next').click(function() {
-    ActionsEvents.baseStopActions ($(this));
+    ActionsEvents.baseStop ($(this));
     
     Level.goNext();
     
     Timer.reset();
     
-    ActionsEvents.baseStartActions();
+    ActionsEvents.baseStart ();
 });

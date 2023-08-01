@@ -1,5 +1,5 @@
 const ActionsEvents = {
-    baseStartActions : function () {
+    baseStart : function () {
         Mode.setStart ();
     
         $('#text-block').show ();
@@ -9,7 +9,7 @@ const ActionsEvents = {
         Timer.run ();
     } ,
     
-    baseStopActions : function (eventObject) {
+    baseStop : function (eventObject) {
         Mode.setStop();
     
         $('#text-block').hide();
