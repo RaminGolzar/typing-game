@@ -1,4 +1,11 @@
+/* global Mode, Timer */
+
 const ActionsEvents = {
+    /**
+     * Basic actions of start event
+     * 
+     * @returns {undefined}
+     */
     baseStart : function () {
         Mode.setStart ();
     
@@ -9,6 +16,12 @@ const ActionsEvents = {
         Timer.run ();
     } ,
     
+    /**
+     * The basic actions of stop event
+     * 
+     * @param {called_event} eventObject
+     * @returns {undefined}
+     */
     baseStop : function (eventObject) {
         Mode.setStop();
     
@@ -17,6 +30,11 @@ const ActionsEvents = {
         eventObject.parent().hide();
     } ,
     
+    /**
+     * Reset the game statistics
+     * 
+     * @returns {undefined}
+     */
     resetGame : function () {
         Level.reset();
     
@@ -25,5 +43,5 @@ const ActionsEvents = {
         Timer.reset();
 
         Record.reset();
-    } ,
+    } 
 };
