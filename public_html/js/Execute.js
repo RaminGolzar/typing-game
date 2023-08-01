@@ -25,35 +25,3 @@ $('#next').click(function() {
     
     baseStartActions();
 });
-
-function resetGame () {
-    Level.reset();
-    
-    RedSign.reset();
-    
-    Timer.reset();
-    
-    Record.reset();
-}
-
-function baseStopActions (eventObject) {
-    Mode.setStop();
-    
-    $('#text-block').hide();
-    
-    eventObject.parent().hide();
-}
-
-function baseStartActions () {
-    Mode.setStart ();
-    
-    $('#text-block').show ();
-    
-    TypingControll.newTextBlock();
-    
-    Timer.run ();
-}
-
-const Execute  = {
-    
-};
