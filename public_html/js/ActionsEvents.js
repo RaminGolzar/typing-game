@@ -1,4 +1,4 @@
-const ExecutiveActions = {
+const ActionsEvents = {
     baseStartActions : function () {
         Mode.setStart ();
     
@@ -9,7 +9,7 @@ const ExecutiveActions = {
         Timer.run ();
     } ,
     
-    baseStopActions : function () {
+    baseStopActions : function (eventObject) {
         Mode.setStop();
     
         $('#text-block').hide();

@@ -5,23 +5,23 @@ $('body').keypress (function (keyEvent) {
 $('#start').click(function() {
     $(this).hide ();
     
-    baseStartActions ();
+    ActionsEvents.baseStartActions ();
 });
 
 $('#stop , #again').click(function() {
-    resetGame();
+    ActionsEvents.resetGame();
     
     $('#start').show();
     
-    baseStopActions ($(this));
+    ActionsEvents.baseStopActions ($(this));
 });
 
 $('#next').click(function() {
-    baseStopActions ($(this));
+    ActionsEvents.baseStopActions ($(this));
     
     Level.goNext();
     
     Timer.reset();
     
-    baseStartActions();
+    ActionsEvents.baseStartActions();
 });
