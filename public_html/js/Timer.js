@@ -43,13 +43,15 @@ const Timer = {
      */
     outputScheduled : null ,
     
+    endTime : false ,
+    
     /**
      * This is executeable method
      * 
      * @returns {undefined}
      */
     run : function () {
-        status.endTime = false;
+        this.endTime = false;
         
         this.outputScheduled = setInterval (function () {
             Timer.scheduledWork ();
@@ -112,7 +114,7 @@ const Timer = {
             return;
         }
         
-        status.endTime = true;
+        this.endTime = true;
         
         this.displayFinalMessage ();
     } ,
