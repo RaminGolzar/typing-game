@@ -61,7 +61,7 @@ const RedSign = {
     reset : function () {
         this.redSignCounter = 0;
         
-        $('red-sign-1 , red-sign-2 , red-sign-3')
+        $('#red-sign-1 , #red-sign-2 , #red-sign-3')
             .removeClass ('w3-text-red')
             .addClass ('w3-text-white');
     } 
