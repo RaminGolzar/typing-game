@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="20">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="22">
         <file>
             <url>public_html/js/TypingControll.js</url>
             <bookmark id="19">
                 <name/>
-                <line>14</line>
+                <line>9</line>
+                <key/>
+            </bookmark>
+            <bookmark id="22">
+                <name/>
+                <line>17</line>
                 <key/>
             </bookmark>
             <bookmark id="20">
@@ -17,8 +22,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/Mode.js</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/RedSign.js</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/TypingControll.js</file>
+            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/Record.js</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/index.html</file>
         </group>
     </open-files>
