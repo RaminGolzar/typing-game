@@ -34,7 +34,7 @@ const Timer = {
      * 
      * @type Number
      */
-    aSecond : 400 , /* todo: replace 100 with the 1000 */
+    aSecond : 1000 ,
     
     /**
      * Hold the output of the scheluded work
@@ -43,16 +43,12 @@ const Timer = {
      */
     outputScheduled : null ,
     
-    endTime : false , /* todo: write a doc */
-    
     /**
      * This is executeable method
      * 
      * @returns {undefined}
      */
     run : function () {
-        this.endTime = false;
-        
         this.outputScheduled = setInterval (function () {
             Timer.scheduledWork ();
         } , this.aSecond);
@@ -111,8 +107,6 @@ const Timer = {
         this.stop ();
         
         if (! RedSign.isGameOver ()) {
-            this.endTime = true;
-        
             this.displayFinalMessage ();
         
             Mode.setStop();
