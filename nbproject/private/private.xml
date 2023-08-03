@@ -5,17 +5,17 @@
             <url>public_html/js/TypingControll.js</url>
             <bookmark id="19">
                 <name/>
-                <line>9</line>
+                <line>7</line>
                 <key/>
             </bookmark>
             <bookmark id="22">
                 <name/>
-                <line>17</line>
+                <line>15</line>
                 <key/>
             </bookmark>
             <bookmark id="20">
                 <name/>
-                <line>328</line>
+                <line>324</line>
                 <key/>
             </bookmark>
         </file>
@@ -24,8 +24,11 @@
         <group>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/Mode.js</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/RedSign.js</file>
+            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/Events.js</file>
+            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/Timer.js</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/TypingControll.js</file>
-            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/Record.js</file>
+            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/js/ActionsEvents.js</file>
+            <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/css/side-style.css</file>
             <file>file:/E:/SoftWare/xampp-windows-x64-8.2.4-0-VS16-installer/htdocs/my_projects/GitHub/typing-game/public_html/index.html</file>
         </group>
     </open-files>
