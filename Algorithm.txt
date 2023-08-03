@@ -12,7 +12,7 @@
 	the number of words of which should be 
 	equal to the level number
 
-+ Allow 7 second to type each line
++ Allow 10 second to type each line
 
 + If 3 lines are not typed, the player loses
 
