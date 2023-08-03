@@ -18,7 +18,6 @@
                 this.newTextBlock ();
             } else if (Mode.isTyping() && this.checkTypingTimeout ()) {
                 Mode.setEndTime();
-                this.registerRedSign();
             } else if (Mode.isTyping() && !this.checkTypingTimeout ()) {
                 this.typing (keyEvent);
             }
@@ -87,7 +86,7 @@
             this.textBlock.stop()
                 .css ({top : '0px'})
                 .animate ({top : '+=210'}, this.typingTimeout ,function () {
-                    this.stopMoving ();
+                    TypingControll.registerRedSign();
                 });
         } ,
         
